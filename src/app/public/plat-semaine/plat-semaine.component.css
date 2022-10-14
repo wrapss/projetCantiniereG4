@@ -1,0 +1,15 @@
+.main{
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+.semaine{
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+
+
+}
+.jours{
+  min-width: 600px;
+}

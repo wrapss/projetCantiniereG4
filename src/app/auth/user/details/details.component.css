@@ -1,0 +1,28 @@
+.main{
+    padding-right: 10%;
+    padding-left: 10%;
+}
+.userInfo{
+    display: flex;
+    justify-content: space-between;
+}
+.item{
+    display: flex;
+    align-items: center;
+
+}
+
+.commandes{
+    padding-top: 50px;
+}
+.commande_title{
+    text-align: center;
+}
+.tableau{
+    margin: auto;
+}
+.actions{
+    padding-top: 50px;
+    display: flex;
+    justify-content: space-between;
+}

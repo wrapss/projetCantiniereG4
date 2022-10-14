@@ -1,0 +1,33 @@
+<div class="main">
+    <p>mon-compte works!</p>
+    <div class="userInfo">
+        <div class="info">
+            <div class="item">
+                <label for="">Prénom : </label>
+                <input type="text"  [(ngModel)]="userInfo.firstname">
+            </div>
+            <div class="item">
+                <label for="">Nom : </label>
+                <input type="text" [(ngModel)]="userInfo.name">
+            </div>
+            <div class="item">
+                <label for="">Addresse mail : </label>
+                <input type="text" [(ngModel)]="userInfo.email">
+            </div>
+            <div class="item">
+                <label for="">Mot de passe : </label>
+                <input type="text" value="****" disabled>
+                <button (click)="showPasswordChange()">-></button>
+            </div>
+            <div class="pass" *ngIf="showPassword">
+                <input type="text" placeholder="Ancien mot de passe">
+                <input type="text" placeholder="Nouveau mot de passe">
+                <input type="text" placeholder="Confirmation du mot de passe">
+            </div>
+            <div class="button">
+                <button >Valider mes modifications</button>
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,16 @@
+<header>
+  <nav class="nav">
+    <ul>
+      <li><a [routerLink]="['recapCommande']">Recap des commandes</a></li>
+      <li><a [routerLink]="['platSemaine']">Plats de la semaine</a></li>
+      <li><a [routerLink]="['carte']">Carte</a></li>
+      <li><a [routerLink]="['user']">Compte utilisateur</a></li>
+      <li><a [routerLink]="['configuration']">Configuration</a></li>
+    </ul>
+    <div >
+      <button (click)="logout()" *ngIf="isAuth">Se deconnecter</button>
+    </div>
+
+  </nav>
+</header>
+<router-outlet></router-outlet>

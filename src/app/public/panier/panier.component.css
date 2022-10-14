@@ -1,0 +1,42 @@
+.main{
+  padding-left: 5%;
+  padding-right: 5%;
+
+}
+.panier{
+  width: 1000px;
+}
+
+.plat{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.button {
+  box-sizing: border-box;
+  appearance: none;
+  background-color: transparent;
+  border: 2px solid $red;
+  border-radius: 0.6em;
+  color: $red;
+  cursor: pointer;
+  display: flex;
+  align-self: center;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1;
+  margin: 20px;
+  padding: 1.2em 2.8em;
+  text-decoration: none;
+  text-align: center;
+  text-transform: uppercase;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  border-color: $blue;
+  color: #fff;
+  box-shadow: 0 0 40px 40px $blue inset, 0 0 0 0 #fff;
+  transition: all 150ms ease-in-out;
+
+}
+
+

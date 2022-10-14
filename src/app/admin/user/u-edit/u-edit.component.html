@@ -1,0 +1,25 @@
+<div class="userDetail">
+    <div>
+        <label for="">Prénom :</label>
+        {{ user.firstname}}
+    </div>
+    <div>
+        <label for="">Nom :</label>
+        {{ user.name}}
+    </div>
+    <div>
+        <label for="">Email :</label>
+        {{ user.email}}
+    </div>
+</div>
+
+<div class="cagnotte">
+    <div>
+        <label for="">Cagnotte : </label>
+        {{ user.wallet }} €
+    </div>
+    <button (click)="creditAccount()" >Créditier</button>
+    <input type="text" name="wallet" id="wallet">
+    <button (click)="soldeAccount()" >Solder le compte</button>
+
+</div>

@@ -1,0 +1,12 @@
+<div class="main">
+  <div class="carte">
+    <div class="categorie" *ngFor="let Categorie of Categories">
+      <h2>{{Categorie.name}}</h2>
+      <div class="item" *ngFor="let menu of getMealByCategory(Categorie.id)">
+        <h5>{{menu.label}}</h5>
+        <label for="">{{menu.priceDF}}€</label>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,18 @@
+<header>
+  <nav class="nav">
+    <ul>
+      <li><a [routerLink]="['/platSemaine']">Plat de la semaine</a></li>
+      <li><a [routerLink]="['/home']">Carte</a></li>
+      <li><a [routerLink]="['auth/monCompte']" *ngIf="tokenService.isLoggedAsUser()">Mon compte</a></li>
+    </ul>
+    <div >
+      <button (click)="openDialogLogin()" *ngIf="!tokenService.isLoggedAsUser()  && !tokenService.isLoggedAsAdmin()">Se connecter </button>
+      <button (click)="logout()" *ngIf="tokenService.isLoggedAsUser() || tokenService.isLoggedAsAdmin()">Se deconnecter</button>
+
+      <button disabled *ngIf="tokenService.isLoggedAsUser() || tokenService.isLoggedAsAdmin()">Bonjour {{firstname}}!</button>
+      <button [routerLink]="['/panier']">Panier ({{cartService.getCountCartProducts()}})</button>
+    </div>
+
+  </nav>
+</header>
+<router-outlet></router-outlet>
