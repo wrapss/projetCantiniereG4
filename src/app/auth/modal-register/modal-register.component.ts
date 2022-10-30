@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {Credentials} from "../../_interfaces/credentials";
+import { ICredentialsRegister} from "../../_interfaces/credentials";
 import {MatDialog} from "@angular/material/dialog";
+import {AuthService} from "../../_services/auth.service";
 
 @Component({
   selector: 'app-modal-register',
@@ -9,11 +10,15 @@ import {MatDialog} from "@angular/material/dialog";
 })
 export class ModalRegisterComponent implements OnInit {
   alerte = false
-  form: Credentials = {
+  form: ICredentialsRegister = {
+    firstname: '',
+    name: '',
     email: '',
-    password: ''
+    password: '',
+    sex: 0
   }
-  constructor(private dialogRef : MatDialog) { }
+  constructor(private dialogRef : MatDialog,
+              private authService: AuthService) { }
 
   ngOnInit(): void {
   }
@@ -21,7 +26,8 @@ export class ModalRegisterComponent implements OnInit {
     this.dialogRef.closeAll();
   }
   onSubmit(): void{
-    console.log(this.form.email)
-
+    this.authService.register(this.form).subscribe(
+        data=> console.log(data)
+    )
   }
 }

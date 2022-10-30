@@ -3,47 +3,84 @@ import {OrderService} from "../../_services/order.service";
 import {formatDate} from "@angular/common";
 
 
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
-];
-
-
 @Component({
   selector: 'app-recap-commandes',
   templateUrl: './recap-commandes.component.html',
   styleUrls: ['./recap-commandes.component.css']
 })
 export class RecapCommandesComponent implements OnInit {
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = ELEMENT_DATA;
   constructor(private orderService: OrderService) { }
 
+
+  orderWaiting: any = []
+
+  ordersFinish: any = []
+
+  dayList: any = [
+    {day: 'Lundi', date: this.getDateOfDay(1)},
+    {day: 'Mardi', date: this.getDateOfDay(2)},
+    {day: 'Mercredi', date: this.getDateOfDay(3)},
+    {day: 'Jeudi', date: this.getDateOfDay(4)},
+    {day: 'Vendredi', date: this.getDateOfDay(5)},
+    {day: 'Samedi', date: this.getDateOfDay(6)},
+    {day: 'Dimanche', date: this.getDateOfDay(0)},
+
+
+  ]
+
   ngOnInit(): void {
+    this.getOrderWaitingForThisWeek()
+    this.getOrderFinishForThisWeek()
 
-    var currentDate = new Date();
+  }
 
-    const cValue = formatDate(currentDate, 'yyyy-MM-dd', 'en-US');
-
-    console.log(cValue)
-    this.orderService.getAllOrders().subscribe(
-        data => console.log(data)
+  getOrderWaitingForThisWeek(){
+    console.log(this.getDateOfDay(0))
+    this.orderService.getOrdersByRangeDate(this.getDateOfDay(-5),this.getDateOfDay(0),0).subscribe(
+        data => {
+          console.log(data)
+          this.orderWaiting = data
+        }
     )
   }
 
+  getOrderFinishForThisWeek(){
+    console.log(this.getDateOfDay(0))
+    this.orderService.getOrdersByRangeDate(this.getDateOfDay(-5),this.getDateOfDay(0),1).subscribe(
+        data => {
+          console.log(data)
+          this.ordersFinish = data
+        }
+    )
+  }
+
+  delivryOrder(id:number){
+    this.orderService.deliveryOrder(id).subscribe(
+        data => this.getOrderWaitingForThisWeek()
+    )
+  }
+  cancelOrder(id:number){
+    this.orderService.cancelOrder(id).subscribe(
+        data=> this.getOrderWaitingForThisWeek()
+    )
+  }
+
+  getOrdersWaitingByDay(date:any){
+    return this.orderWaiting.filter((f:any) => f.creationDate == date)
+  }
+
+  getOrdersFinishByDay(date:any){
+    return this.ordersFinish.filter((f:any) => f.creationDate == date)
+  }
+
+
+  getDateOfDay(day:any){
+    const today = new Date();
+    const dateT = today.getDate() - today.getDay() + day;
+    const date = new Date(today.setDate(dateT));
+
+    const fridayDate = formatDate(date, 'yyyy-MM-dd', 'fr-FR');
+
+    return fridayDate;
+  }
 }

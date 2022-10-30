@@ -35,6 +35,10 @@ export class CartService {
         localStorage.setItem("cart_items", JSON.stringify(products));
     }
 
+    removeLocalCart() {
+        localStorage.removeItem("cart_items");
+    }
+
     // Fetching Locat CartsProducts
     getLocalCartProducts(){
         // @ts-ignore

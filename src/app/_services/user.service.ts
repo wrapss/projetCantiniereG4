@@ -17,15 +17,19 @@ export class UserService {
     return this.http.get('http://localhost:8080/stone.lunchtime/user/findall')
   }
 
-  getUser(uid: string | null){
-    return this.http.get('http://localhost:8080/stone.lunchtime/user/find/'+uid)
+  getUser(id: number){
+    return this.http.get('http://localhost:8080/stone.lunchtime/user/find/'+id)
   }
 
-  soldeAccountUser(){
-    return this.http.post('http://localhost:8080/stone.lunchtime/user/debit/1?amount=1',{})
+  soldeAccountUser(uid:any,amount:number){
+    return this.http.post('http://localhost:8080/stone.lunchtime/user/debit/'+uid+'?amount='+amount,{})
   }
 
-  creditAccountUser(){
-    return this.http.post('http://localhost:8080/stone.lunchtime/user/credit/1?amount=1',{})
+  creditAccountUser(uid:any,amount:number){
+    return this.http.post('http://localhost:8080/stone.lunchtime/user/credit/'+uid+'?amount='+amount,{})
+  }
+
+  editUser(userID:any,user:any){
+    return this.http.patch('http://localhost:8080/stone.lunchtime/user/update/'+userID,user)
   }
 }

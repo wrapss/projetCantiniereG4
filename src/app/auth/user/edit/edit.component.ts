@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {IUser} from "../../../_interfaces/user";
 import {TokenService} from "../../../_services/token.service";
+import {UserService} from "../../../_services/user.service";
 
 @Component({
   selector: 'app-edit',
@@ -9,7 +10,9 @@ import {TokenService} from "../../../_services/token.service";
 })
 export class EditComponent implements OnInit {
 
-  constructor(private tokenService: TokenService) { }
+  constructor(private tokenService: TokenService,
+              private userService: UserService
+  ) { }
 
   showPassword = false;
 
@@ -24,12 +27,13 @@ export class EditComponent implements OnInit {
     postalCode: '',
     town: '',
     isLunchLady: 0,
-    wallet: 0,
     imageId: 0,
+
+    wallet: 0,
     registrationDate: '',
     status: ''
   }
-
+  userID:any =  0
 
   showPasswordChange(){
     console.log(this.showPassword)
@@ -39,8 +43,18 @@ export class EditComponent implements OnInit {
     this.showPassword = true
   }
 
+  editUser(){
+    this.userService.editUser(this.userInfo.id,this.userInfo).subscribe(
+        data=> console.log(data)
+    )
+  }
+
   ngOnInit(): void {
-    this.userInfo = this.tokenService.getUserInfo();
+    var userID = this.tokenService.getUserID();
+    this.userService.getUser(Number(userID)).subscribe(
+        data=> this.userInfo =data as IUser
+    )
+
   }
 
 }

@@ -23,26 +23,26 @@
     <div class="commandes">
         <h4 class="commande_title">Commande en cours :</h4>
         <table class="tableau">
+            <thead>
             <tr>
-                <th>Company</th>
-                <th>Contact</th>
-                <th>Country</th>
+                <th>id</th>
+                <th>date</th>
+                <th>time</th>
             </tr>
-            <tr>
-                <td>Alfreds Futterkiste</td>
-                <td>Maria Anders</td>
-                <td>Germany</td>
+            </thead>
+            <tbody>
+            <tr *ngFor="let order of orderUnconfirmed">
+                <td>{{order.id}}</td>
+                <td>{{order.creationDate}}</td>
+                <td>{{order.creationTime}}</td>
             </tr>
-            <tr>
-                <td>Centro comercial Moctezuma</td>
-                <td>Francisco Chang</td>
-                <td>Mexico</td>
-            </tr>
+            </tbody>
+
 
         </table>
     </div>
     <div class="actions">
-        <button>Modifier mes infos</button>
+        <button [routerLink]="['edit']">Modifier mes infos</button>
         <button>Supprimer mon compte</button>
     </div>
 </div>

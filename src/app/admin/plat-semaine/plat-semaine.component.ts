@@ -24,20 +24,26 @@ export class PlatSemaineComponent implements OnInit {
       private menuService: MenuService
               ) { }
 
-  menus: IMenu = {
-    id: 0,
+  menus: any = []
+
+  newmenu: any = {
     label: '',
-    priceDF: '',
-    jours: ''
+    priceDF: 1
   }
 
   ngOnInit(): void {
     this.menuService.getAllMenus().subscribe(
-        // @ts-ignore
         data=>  this.menus = data
     )
     const today = new Date();
     const weekNumber = this.datepipe.transform(today, 'w');
     const dayNumber = this.datepipe.transform(today, 'c');
+  }
+
+  addMenu(){
+    console.log('add menu')
+    this.menuService.addMenu(this.newmenu).subscribe(
+        data => console.log(data)
+    )
   }
 }

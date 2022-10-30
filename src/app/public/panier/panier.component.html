@@ -1,4 +1,9 @@
 <div class="main">
+  <div *ngIf="showError" class="alert alert-danger">
+    <div class="message"> Heure de commande depassé</div>
+    <div class="close">x</div>
+
+  </div>
   <div class="panier">
     <div class="jours" *ngFor="let JourSemaine of JoursSemaine">
       <h4>Pour {{JourSemaine.name}}</h4>
@@ -12,7 +17,8 @@
 
     <div class="total">
       <h1>total : {{cartService.getTotalBalanceCart()}} €</h1>
-      <button *ngIf="tokenService.isLoggedAsUser || tokenService.isLoggedAsAdmin">Valider la commande</button>
+
+      <button *ngIf="tokenService.isLoggedAsUser || tokenService.isLoggedAsAdmin" (click)="confirmOrder()">Valider la commande</button>
     </div>
   </div>
 </div>

@@ -3,7 +3,7 @@
     <ul>
       <li><a [routerLink]="['/platSemaine']">Plat de la semaine</a></li>
       <li><a [routerLink]="['/home']">Carte</a></li>
-      <li><a [routerLink]="['auth/monCompte']" *ngIf="tokenService.isLoggedAsUser()">Mon compte</a></li>
+      <li><a [routerLink]="['auth/user']" *ngIf="tokenService.isLoggedAsUser()">Mon compte</a></li>
     </ul>
     <div >
       <button (click)="openDialogLogin()" *ngIf="!tokenService.isLoggedAsUser()  && !tokenService.isLoggedAsAdmin()">Se connecter </button>

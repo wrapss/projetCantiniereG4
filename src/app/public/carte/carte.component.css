@@ -10,8 +10,10 @@
 
 }
 .categorie{
-  min-width: 350px;
+  width: 200px;
 }
 .item{
   display: flex;
+  height: 30px;
+  align-items: center;
 }

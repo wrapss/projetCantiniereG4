@@ -7,6 +7,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from  '@angular/common/http';
 import { DatePipe } from '@angular/common';
 import {TokenInterceptorProvider} from "./_helpers/token.interceptor";
+import { registerLocaleData } from '@angular/common';
+import localeES from "@angular/common/locales/fr";
+registerLocaleData(localeES, "fr");
 
 @NgModule({
   declarations: [

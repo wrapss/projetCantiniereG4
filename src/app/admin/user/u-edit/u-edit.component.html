@@ -19,7 +19,7 @@
         {{ user.wallet }} €
     </div>
     <button (click)="creditAccount()" >Créditier</button>
-    <input type="text" name="wallet" id="wallet">
+    <input type="number" id="amount" [(ngModel)]="amount" name="amount">
     <button (click)="soldeAccount()" >Solder le compte</button>
 
 </div>

@@ -47,6 +47,15 @@ export class TokenService {
     return false
   }
 
+  getUserID(){
+    const token = localStorage.getItem('token')
+    if(token != null){
+      const decode : any = jwtDecode(token)
+      return decode.user.id
+    }
+    return false
+  }
+
   clearToken(): void{
     localStorage.removeItem('token')
     this.router.navigate(['/'])

@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {CartService} from "../../_services/cart.service";
 import {TokenService} from "../../_services/token.service";
+import {UserService} from "../../_services/user.service";
+import {IUser} from "../../_interfaces/user";
+import {OrderService} from "../../_services/order.service";
 
 @Component({
   selector: 'app-panier',
@@ -8,6 +11,23 @@ import {TokenService} from "../../_services/token.service";
   styleUrls: ['./panier.component.css']
 })
 export class PanierComponent implements OnInit {
+
+  user: IUser = {
+    id: 0,
+    firstname: '',
+    name: '',
+    email: '',
+    phone: '',
+    sex: 0,
+    address: '',
+    postalCode: '',
+    town: '',
+    isLunchLady: 0,
+    wallet: 0,
+    imageId: 0,
+    registrationDate: '',
+    status: ''
+  }
 
   JoursSemaine = [
     {id: 1, name: 'Lundi'},
@@ -17,9 +37,15 @@ export class PanierComponent implements OnInit {
     {id: 5, name: 'Vendredi'},
   ];
 
+  showError: boolean = false
+
   constructor(protected cartService: CartService,
-              protected tokenService: TokenService
+              protected tokenService: TokenService,
+              protected userService: UserService,
+              protected orderService: OrderService
   ) { }
+
+
 
   ngOnInit(): void {
     this.cartService.getTotalBalanceCart()
@@ -29,8 +55,44 @@ export class PanierComponent implements OnInit {
     this.cartService.removeLocalCartProduct(id)
   }
 
+
   getPlatByJours(jours : any){
     return this.cartService.getLocalCartProducts().filter((f) => f.jours == jours)
+  }
+
+
+  confirmOrder(){
+    let userId = this.tokenService.getUserInfo().id;
+    this.userService.getUser(userId).subscribe(
+        data => {
+          // @ts-ignore
+          let user = data
+
+          let total = this.cartService.getTotalBalanceCart();
+
+          let panier = this.cartService.getLocalCartProducts();
+          if(panier.length !== 0){
+            // @ts-ignore
+            if(user.wallet >= total){
+              console.log('utilisateur a suffisament de fond')
+              // @ts-ignore
+              this.orderService.createOrder(user.id).subscribe(
+                  data => {
+                    console.log(data)
+                    this.cartService.removeLocalCart()
+                  },
+                  error => this.showError = true
+              )
+            }else{
+              console.log('pas assez de credit')
+            }
+          }else{
+            console.log('panier vide ')
+          }
+
+        }
+    )
+
   }
 
 }

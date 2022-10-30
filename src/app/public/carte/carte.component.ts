@@ -11,19 +11,12 @@ import {IMeal} from "../../_interfaces/meal";
 export class CarteComponent implements OnInit {
 
   Categories = [
-    {id: 0, name: 'unknown'},
     {id: 1, name: 'appetizers'},
     {id: 2, name: 'starters'},
     {id: 3, name: 'appetizers'},
-    {id: 4, name: 'main_dishes'},
     {id: 5, name: 'others'},
-    {id: 6, name: 'desserts'},
     {id: 7, name: 'brunchs_and_lunches'},
-    {id: 8, name: 'soups'},
     {id: 9, name: 'sauces'},
-    {id: 10, name: 'drinks'},
-    {id: 11, name: 'sandwiches'},
-    {id: 12, name: 'snacks'},
 
   ];
 
@@ -33,6 +26,7 @@ export class CarteComponent implements OnInit {
   constructor(private mealService: MealService) { }
 
   ngOnInit(): void {
+    console.log(this.getImageMealByID())
     this.mealService.getAllMeals().subscribe(
         // @ts-ignore
         data => this.AllMenus = data
@@ -43,5 +37,16 @@ export class CarteComponent implements OnInit {
   getMealByCategory(category: any){
     return this.AllMenus.filter((f) => f.category == category)
   }
+
+  getImageMealByID(){
+     return this.mealService.getImageMenuByID(1).subscribe(
+        data => {
+          console.log(data)
+          // @ts-ignore
+          return 'http://localhost:8080/stone.lunchtime/'+data.imagePath
+        }
+    )
+  }
+  //
 
 }

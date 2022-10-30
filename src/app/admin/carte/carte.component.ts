@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {MealService} from "../../_services/meal.service";
 import {IMeal} from "../../_interfaces/meal";
-import {Credentials} from "../../_interfaces/credentials";
 export interface PeriodicElement {
   name: string;
   position: number;
@@ -51,20 +50,12 @@ const ELEMENT_DATA: PeriodicElement[] = [
 export class CarteComponent implements OnInit {
 // The category for this element. unknown(0), appetizers(1), starters(2), main_dishes(3), others(4), desserts(5), brunchs_and_lunches(6), soups(7), sauces(8), drinks(9), sandwiches(10), snacks(11)
   Categories = [
-    {id: 0, name: 'unknown'},
     {id: 1, name: 'appetizers'},
       {id: 2, name: 'starters'},
       {id: 3, name: 'appetizers'},
-      {id: 4, name: 'main_dishes'},
       {id: 5, name: 'others'},
-      {id: 6, name: 'desserts'},
       {id: 7, name: 'brunchs_and_lunches'},
-      {id: 8, name: 'soups'},
       {id: 9, name: 'sauces'},
-      {id: 10, name: 'drinks'},
-      {id: 11, name: 'sandwiches'},
-      {id: 12, name: 'snacks'},
-
     ];
   AllMenus: IMeal[] = [
   ]
@@ -72,6 +63,7 @@ export class CarteComponent implements OnInit {
   form = {
     label: '',
     priceDF: '',
+    category: ''
   }
 
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
@@ -93,6 +85,10 @@ export class CarteComponent implements OnInit {
     return this.AllMenus.filter((f) => f.category == category)
   }
 
+  getMealByWeek(category: any){
+    return this.AllMenus.filter((f) => f.category == category)
+  }
+
   onSubmitAddMeal(ui: any){
     let envoi = {
       label: this.form.label,
@@ -108,4 +104,6 @@ export class CarteComponent implements OnInit {
         data => this.getAllMeal()
     )
   }
+
+
 }

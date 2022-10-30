@@ -2,7 +2,7 @@
   <div class="semaine">
     <div class="jours" *ngFor="let JourSemaine of JoursSemaine" >
       <h2>{{JourSemaine.name}}</h2>
-      <div *ngFor="let platJour of getPlatByJours(JourSemaine.name)">
+     <div *ngFor="let platJour of getPlatByJours(JourSemaine.name)">
         <span>{{platJour.label}} - </span>
         <span>{{platJour.priceDF}} €</span>
 
@@ -10,6 +10,14 @@
       </div>
     </div>
   </div>
+
+    <hr>
+    <div class="semaine">
+        <div class="jours" *ngFor="let JourSemaine of JoursSemaine">
+            <h2>{{JourSemaine.name}}</h2>
+
+        </div>
+    </div>
 </div>
 
 

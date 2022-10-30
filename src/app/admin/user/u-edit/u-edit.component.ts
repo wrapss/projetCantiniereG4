@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {UserService} from "../../../_services/user.service";
 import {ActivatedRoute} from "@angular/router";
 import {IUser} from "../../../_interfaces/user";
-
 @Component({
   selector: 'app-u-edit',
   templateUrl: './u-edit.component.html',
@@ -26,6 +25,7 @@ export class UEditComponent implements OnInit {
     registrationDate: '',
     status: ''
   }
+  amount: number = 0;
 
 
   constructor(
@@ -35,7 +35,9 @@ export class UEditComponent implements OnInit {
 
   ngOnInit(): void {
     let uid = this.activated.snapshot.paramMap.get('uid')
-    this.userService.getUser(uid).subscribe(
+
+    console.log(uid)
+    this.userService.getUser(Number(uid)).subscribe(
         data => {
           // @ts-ignore
           this.user = data
@@ -44,7 +46,9 @@ export class UEditComponent implements OnInit {
   }
 
   soldeAccount(){
-    this.userService.soldeAccountUser().subscribe(
+    let uid = this.activated.snapshot.paramMap.get('uid')
+
+    this.userService.soldeAccountUser(uid,this.amount).subscribe(
         data => {
           // @ts-ignore
           this.user = data
@@ -53,7 +57,9 @@ export class UEditComponent implements OnInit {
   }
 
   creditAccount(){
-    this.userService.creditAccountUser().subscribe(
+    let uid = this.activated.snapshot.paramMap.get('uid')
+
+    this.userService.creditAccountUser(uid,this.amount).subscribe(
         data => {
           // @ts-ignore
           this.user = data
