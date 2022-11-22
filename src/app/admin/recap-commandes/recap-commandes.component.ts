@@ -17,7 +17,7 @@ export class RecapCommandesComponent implements OnInit {
   ordersFinish: any = []
 
   dayList: any = [
-    {day: 'Lundi', date: this.getDateOfDay(1)},
+    {day: 'Lundiss', date: this.getDateOfDay(1)},
     {day: 'Mardi', date: this.getDateOfDay(2)},
     {day: 'Mercredi', date: this.getDateOfDay(3)},
     {day: 'Jeudi', date: this.getDateOfDay(4)},
@@ -28,25 +28,34 @@ export class RecapCommandesComponent implements OnInit {
 
   ]
 
+  alert =  {
+    message: '',
+    show: false,
+    type: ''
+  }
+
   ngOnInit(): void {
     this.getOrderWaitingForThisWeek()
     this.getOrderFinishForThisWeek()
 
   }
 
+  setAlert(type:string, message:string, show:boolean){
+    this.alert.show = show
+    this.alert.message = message
+    this.alert.type = type
+  }
+
   getOrderWaitingForThisWeek(){
-    console.log(this.getDateOfDay(0))
-    this.orderService.getOrdersByRangeDate(this.getDateOfDay(-5),this.getDateOfDay(0),0).subscribe(
+    this.orderService.getOrdersByRangeDate(this.getDateOfDay(0),this.getDateOfDay(6),0).subscribe(
         data => {
-          console.log(data)
           this.orderWaiting = data
         }
     )
   }
 
   getOrderFinishForThisWeek(){
-    console.log(this.getDateOfDay(0))
-    this.orderService.getOrdersByRangeDate(this.getDateOfDay(-5),this.getDateOfDay(0),1).subscribe(
+    this.orderService.getOrdersByRangeDate(this.getDateOfDay(0),this.getDateOfDay(6),1).subscribe(
         data => {
           console.log(data)
           this.ordersFinish = data
@@ -56,12 +65,19 @@ export class RecapCommandesComponent implements OnInit {
 
   delivryOrder(id:number){
     this.orderService.deliveryOrder(id).subscribe(
-        data => this.getOrderWaitingForThisWeek()
+        data => {
+          this.setAlert('success', 'Commande livré!', true)
+
+          this.getOrderWaitingForThisWeek()
+        }
     )
   }
   cancelOrder(id:number){
     this.orderService.cancelOrder(id).subscribe(
-        data=> this.getOrderWaitingForThisWeek()
+        data=> {
+          this.setAlert('success', 'Commande annulé!', true)
+          this.getOrderWaitingForThisWeek()
+        }
     )
   }
 

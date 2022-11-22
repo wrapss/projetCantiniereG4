@@ -1,4 +1,8 @@
 <p>recap-commandes works!</p>
+<div *ngIf="alert.show" class="alert alert-{{alert.type}}">
+    <div class="message"> {{alert.message}}</div>
+    <div class="close"><button (click)="setAlert('','',false)">x</button></div>
+</div>
 <mat-tab-group>
     <mat-tab *ngFor="let day of dayList" label="{{day.day}}">
         <table class="tableau">

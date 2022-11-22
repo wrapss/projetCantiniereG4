@@ -27,24 +27,16 @@ export class ModalLoginComponent  {
   }
 
   openDialogRegister(){
-    this.dialogRef.open(ModalRegisterComponent,{
-      data : {
-        name : 'Samuel'
-      }
-    });
+    this.dialogRef.open(ModalRegisterComponent);
   }
 
   openDialogPassword(){
-    this.dialogRef.open(MdpOublieComponent,{
-      data : {
-        name : 'Samuel'
-      }
-    });
+    this.dialogRef.open(MdpOublieComponent);
   }
-  login(): void{
-    this.authService.login(this.form).subscribe(
+  login() {
+     this.authService.login(this.form).subscribe(
       data => {
-        // @ts-ignore
+         //@ts-ignore
         this.tokenService.saveToken(data.headers.get('Authorization'))
         this.dialogRef.closeAll();
       },

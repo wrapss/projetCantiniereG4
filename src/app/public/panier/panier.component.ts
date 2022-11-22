@@ -37,7 +37,12 @@ export class PanierComponent implements OnInit {
     {id: 5, name: 'Vendredi'},
   ];
 
-  showError: boolean = false
+
+  alert =  {
+    message: '',
+    show: false,
+    type: ''
+  }
 
   constructor(protected cartService: CartService,
               protected tokenService: TokenService,
@@ -60,39 +65,44 @@ export class PanierComponent implements OnInit {
     return this.cartService.getLocalCartProducts().filter((f) => f.jours == jours)
   }
 
+  setAlert(type:string, message:string, show:boolean){
+    this.alert.show = show
+    this.alert.message = message
+    this.alert.type = type
+  }
 
   confirmOrder(){
+    this.setAlert('','',false)
     let userId = this.tokenService.getUserInfo().id;
     this.userService.getUser(userId).subscribe(
         data => {
           // @ts-ignore
           let user = data
-
           let total = this.cartService.getTotalBalanceCart();
-
           let panier = this.cartService.getLocalCartProducts();
           if(panier.length !== 0){
             // @ts-ignore
             if(user.wallet >= total){
-              console.log('utilisateur a suffisament de fond')
               // @ts-ignore
               this.orderService.createOrder(user.id).subscribe(
                   data => {
                     console.log(data)
                     this.cartService.removeLocalCart()
+                    this.setAlert('success',`Commande validé`,true)
                   },
-                  error => this.showError = true
+                  error => {
+                    console.log(error)
+                    this.setAlert('danger',`Heure de commande dépassé`,true)
+                  }
               )
             }else{
-              console.log('pas assez de credit')
+              this.setAlert('danger',`Votre n'avez pas assez de crédit`,true)
             }
           }else{
-            console.log('panier vide ')
+            this.setAlert('danger','Votre panier est vide!',true)
           }
-
         }
     )
-
   }
 
 }
