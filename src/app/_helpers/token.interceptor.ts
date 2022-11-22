@@ -26,8 +26,10 @@ export class TokenInterceptor implements HttpInterceptor {
                 catchError(error => {
                     if(error.status === 401){
                         this.tokenService.clearToken()
+
                     }
                     return throwError('Session Expired')
+
                 })
             )
         }

@@ -6,7 +6,6 @@ import { CarteComponent } from './carte/carte.component';
 import {PublicRoutingModule} from "./public-routing.module";
 import { LayoutComponent } from './layout/layout.component';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
-import { DebugComponent } from './debug/debug.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +13,6 @@ import { DebugComponent } from './debug/debug.component';
     PanierComponent,
     CarteComponent,
     LayoutComponent,
-    DebugComponent
   ],
   imports: [
     CommonModule,

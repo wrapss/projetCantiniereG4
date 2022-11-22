@@ -1,8 +1,7 @@
 <div class="main">
-  <div *ngIf="showError" class="alert alert-danger">
-    <div class="message"> Heure de commande depassé</div>
-    <div class="close">x</div>
-
+  <div *ngIf="alert.show" class="alert alert-{{alert.type}}">
+    <div class="message"> {{alert.message}}</div>
+    <div class="close"><button (click)="setAlert('','',false)">x</button></div>
   </div>
   <div class="panier">
     <div class="jours" *ngFor="let JourSemaine of JoursSemaine">

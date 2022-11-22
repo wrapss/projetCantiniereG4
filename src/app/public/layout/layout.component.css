@@ -2,11 +2,14 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: white;
-  padding-right: 2%;
+  background: #a29e9e;
 }
 .nav ul li {
   list-style-type: none;
   display: inline-block;
   padding: 10px 20px;
+}
+.container{
+  padding-left: 13rem;
+  padding-right: 13rem;
 }
