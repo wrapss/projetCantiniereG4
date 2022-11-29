@@ -1,0 +1,19 @@
+.main{
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+.carte{
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+
+}
+.categorie{
+  width: 200px;
+}
+.item{
+  display: flex;
+  height: 30px;
+  align-items: center;
+}

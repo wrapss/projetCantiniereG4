@@ -1,0 +1,32 @@
+<p>plat-semaine works!</p>
+<div class="addPlat">
+    <form (submit)="addMenu()">
+        <label for="">Nom du plat</label>
+        <input type="text" name="label" [(ngModel)]="newmenu.label" >
+        <label for="">Prix</label>
+        <input type="number" name="prixDF" [(ngModel)]="newmenu.priceDF">
+        <button>Ajouter un plat</button>
+    </form>
+
+</div>
+<div class="semaine">
+
+
+    <div class="jours" *ngFor="let Jours of JoursSemaine">
+        <h2>{{Jours.name}}</h2>
+        <div>
+            <label for="">Plat 1</label>
+            <select>
+                <option *ngFor="let menu of menus">{{menu.label}}</option>
+            </select>
+        </div>
+        <div>
+            <label for="">Plat 2</label>
+            <select>
+                <option *ngFor="let menu of menus">{{menu.label}}</option>
+            </select>
+        </div>
+    </div>
+    <button>valider</button>
+
+</div>

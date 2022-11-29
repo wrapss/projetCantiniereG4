@@ -1,0 +1,23 @@
+<form (ngSubmit)="onSubmit()">
+
+    <div class="form_error" *ngIf="alerte">
+        User not found
+    </div>
+    <div class="group">
+        <input type="text" id="prenom" placeholder="Prénom" [(ngModel)]="form.firstname" name="prenom">
+    </div>    <input type="text" id="nom" placeholder="Nom" [(ngModel)]="form.name" name="nom">
+    <div class="group">
+</div>
+
+    <div class="group">
+        <input type="text" id="email" placeholder="Adresse email" [(ngModel)]="form.email" name="email">
+    </div>
+    <div class="group">
+        <input type="password" id="password" placeholder="Mot de passe" [(ngModel)]="form.password" name="password">
+    </div>
+
+    <div class="group">
+        <button (click)="close()">Annuler</button>
+        <button>Créer un compte</button>
+    </div>
+</form>

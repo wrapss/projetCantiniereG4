@@ -1,0 +1,48 @@
+<div class="main">
+    <p>mon-compte works!</p>
+    <div class="userInfo">
+        <div class="info">
+            <div class="item">
+                <label for="">Prénom : </label>
+                <span>{{userInfo.firstname}}</span>
+            </div>
+            <div class="item">
+                <label for="">Nom : </label>
+                <span>{{userInfo.name}}</span>
+            </div>
+            <div class="item">
+                <label for="">Addresse mail : </label>
+                <span>{{userInfo.email}}</span>
+            </div>
+
+        </div>
+        <div class="cagnotte">
+            <button>Cagnotte : {{userInfo.wallet}} €</button>
+        </div>
+    </div>
+    <div class="commandes">
+        <h4 class="commande_title">Commande en cours :</h4>
+        <table class="tableau">
+            <thead>
+            <tr>
+                <th>id</th>
+                <th>date</th>
+                <th>time</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let order of orderUnconfirmed">
+                <td>{{order.id}}</td>
+                <td>{{order.creationDate}}</td>
+                <td>{{order.creationTime}}</td>
+            </tr>
+            </tbody>
+
+
+        </table>
+    </div>
+    <div class="actions">
+        <button [routerLink]="['edit']">Modifier mes infos</button>
+        <button>Supprimer mon compte</button>
+    </div>
+</div>

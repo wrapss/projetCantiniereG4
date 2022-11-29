@@ -1,0 +1,32 @@
+<p>compte-utilisateurs works!</p>
+
+
+<table mat-table [dataSource]="userList" class="mat-elevation-z8">
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="firstname">
+        <th mat-header-cell *matHeaderCellDef> Prenom </th>
+        <td mat-cell *matCellDef="let element"> {{element.firstname}} </td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Nom </th>
+        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef> Email </th>
+        <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+    </ng-container>
+    <!-- Star Column -->
+    <ng-container matColumnDef="star" stickyEnd>
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let element">
+            <a [routerLink]="['edit',element.id]"><mat-icon >visibility</mat-icon></a>
+        </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

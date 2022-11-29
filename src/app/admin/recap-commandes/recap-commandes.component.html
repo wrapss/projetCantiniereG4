@@ -1,0 +1,49 @@
+<p>recap-commandes works!</p>
+<div *ngIf="alert.show" class="alert alert-{{alert.type}}">
+    <div class="message"> {{alert.message}}</div>
+    <div class="close"><button (click)="setAlert('','',false)">x</button></div>
+</div>
+<mat-tab-group>
+    <mat-tab *ngFor="let day of dayList" label="{{day.day}}">
+        <table class="tableau">
+            <thead>
+            <tr>
+                <th>id</th>
+                <th>client</th>
+                <th>Commande</th>
+
+                <th>status</th>
+                <th>Annuler</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let order of getOrdersWaitingByDay(day.date)">
+                <td>{{order.id}}</td>
+                <td>{{order.user.firstname}} {{order.user.name}}</td>
+                <td>{{order}}</td>
+                <td *ngIf="order.status == 0">
+                    <input type="checkbox" (click)="delivryOrder(order.id)">
+                </td>
+                <td><button (click)="cancelOrder(order.id)">Annuler</button></td>
+            </tr>
+
+            <tr *ngFor="let order of getOrdersFinishByDay(day.date)">
+                <td>{{order.id}}</td>
+                <td>{{order.user.firstname}} {{order.user.name}}</td>
+                <td>{{order}}</td>
+                <td *ngIf="order.status == 0">
+                    <input type="checkbox" (click)="delivryOrder(order.id)">
+                </td>
+                <td *ngIf="order.status == 1">
+                    <input type="checkbox"  checked disabled>
+                </td>
+            </tr>
+
+            </tbody>
+
+
+        </table>
+    </mat-tab>
+
+</mat-tab-group>

@@ -1,0 +1,24 @@
+<div class="main">
+  <div *ngIf="alert.show" class="alert alert-{{alert.type}}">
+    <div class="message"> {{alert.message}}</div>
+    <div class="close"><button (click)="setAlert('','',false)">x</button></div>
+  </div>
+  <div class="panier">
+    <div class="jours" *ngFor="let JourSemaine of JoursSemaine">
+      <h4>Pour {{JourSemaine.name}}</h4>
+      <div class="plat" *ngFor="let platJour of getPlatByJours(JourSemaine.name)">
+        <h6>Nom : {{platJour.label}}  </h6>
+        <h6>prix : {{platJour.priceDF}}€</h6>
+        <button (click)="removeCartItem(platJour.id)" class="button">supprimer</button>
+      </div>
+    </div>
+
+
+    <div class="total">
+      <h1>total : {{cartService.getTotalBalanceCart()}} €</h1>
+
+      <button *ngIf="tokenService.isLoggedAsUser || tokenService.isLoggedAsAdmin" (click)="confirmOrder()">Valider la commande</button>
+    </div>
+  </div>
+</div>
+
