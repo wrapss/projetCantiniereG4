@@ -1,29 +1,35 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import { Observable } from 'rxjs';
+import { IApi } from '../_interfaces/api';
+// import { IMenu } from '../_interfaces/menu';
+
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
 export class MealService {
 
-    constructor(private http: HttpClient) { }
+  constructor(private _http: HttpClient) { }
 
-    getAllMeals(){
-        return this.http.get('http://localhost:8080/stone.lunchtime/meal/findall\n')
-    }
+  /*
+  public getAllMeals(): Observable<Object> {
+    return this._http.get('http://localhost:8080/stone.lunchtime/meal/findall\n');  // Must be connected as lunch lady to see all...
+  }*/
 
-    addMeal(data: any){
-        return this.http.put('http://localhost:8080/stone.lunchtime/meal/add', data)
-    }
+  public getAllMeals(): Observable<Object> {
+    return this._http.get('http://localhost:8080/stone.lunchtime/meal/findallavailableforthisweek');
+  }
 
-    deleteMealByID(id: any){
-        return this.http.delete('http://localhost:8080/stone.lunchtime/meal/delete/'+id)
+  public addMeal(data: any): Observable<Object> {
+    return this._http.put('http://localhost:8080/stone.lunchtime/meal/add', data);
+  }
 
-    }
+  public deleteMealByID(id: number): Observable<Object> {
+    return this._http.delete('http://localhost:8080/stone.lunchtime/meal/delete/' + id);
+  }
 
-    getImageMenuByID(id:number) : Observable<IApi>{
-        return this.http.get('http://localhost:8080/stone.lunchtime/meal/findimg/'+id)
-    }
-}
-export interface IApi {
+  public getImageMenuByID(id: number): Observable<IApi> {
+    return this._http.get('http://localhost:8080/stone.lunchtime/meal/findimg/' + id);
+  }
+  
 }

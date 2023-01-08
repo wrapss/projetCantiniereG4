@@ -1,45 +1,48 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
+import { Observable } from 'rxjs';
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
 export class MenuService {
 
-    constructor(private http: HttpClient) { }
+  constructor(private _http: HttpClient) { }
 
-    getAllMenus(){
-        return this.http.get('http://localhost:8080/stone.lunchtime/menu/findall')
-    }
+  public getAllMenus(): Observable<Object> {
+    return this._http.get('http://localhost:8080/stone.lunchtime/menu/findall');
+  }
 
-    getMenuById(Id: number){
-        return this.http.get('http://localhost:8080/stone.lunchtime/menu/find/'+Id)
-    }
+  public getMenuById(Id: number): Observable<Object> {
+    return this._http.get('http://localhost:8080/stone.lunchtime/menu/find/' + Id);
+  }
 
-    getMenuImageById(Id: number){
-        return this.http.get('http://localhost:8080/stone.lunchtime/menu/findimg/'+Id)
-    }
-    getAllMenusByWeekAndDay(week:any, day:number){
-        return this.http.get('http://localhost:8080/stone.lunchtime/menu/findallavailableforweekandday/'+week+'/'+day)
-    }
+  public getMenuImageById(Id: number): Observable<Object> {
+    return this._http.get('http://localhost:8080/stone.lunchtime/menu/findimg/' + Id);
+  }
+  
+  public getAllMenusByWeekAndDay(week: any, day: number): Observable<Object> {
+    return this._http.get('http://localhost:8080/stone.lunchtime/menu/findallavailableforweekandday/' + week + '/' + day);
+  }
 
-    getAllMenusByWeek(week:number){
-        return this.http.get('http://localhost:8080/stone.lunchtime/menu/findallavailableforweek/'+week)
-    }
+  public getAllMenusByWeek(week: number): Observable<Object> {
+    return this._http.get('http://localhost:8080/stone.lunchtime/menu/findallavailableforweek/' + week);
+  }
 
-    getAllMenusForThisDay(){
-        return this.http.get('http://localhost:8080/stone.lunchtime/menu/findallavailablefortoday')
-    }
+  public getAllMenusForThisDay(): Observable<Object> {
+    return this._http.get('http://localhost:8080/stone.lunchtime/menu/findallavailablefortoday');
+  }
 
-    getAllMenusForThisWeek(){
-        return this.http.get('http://localhost:8080/stone.lunchtime/menu/findallavailableforthisweek')
-    }
+  public getAllMenusForThisWeek(): Observable<Object> {
+    return this._http.get('http://localhost:8080/stone.lunchtime/menu/findallavailableforthisweek');
+  }
 
-    addMenu(newMenu:any){
-        return this.http.put('http://localhost:8080/stone.lunchtime/menu/add',newMenu)
-    }
+  public addMenu(newMenu: any): Observable<Object> {
+    return this._http.put('http://localhost:8080/stone.lunchtime/menu/add', newMenu);
+  }
 
-    getImageMenuByID(id:number){
-        return this.http.get('http://localhost:8080/stone.lunchtime/menu/findimg/'+id)
-    }
+  public getImageMenuByID(id: number): Observable<Object> {
+    return this._http.get('http://localhost:8080/stone.lunchtime/menu/findimg/' + id);
+  }
+  
 }

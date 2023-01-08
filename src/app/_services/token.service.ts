@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import {Router} from "@angular/router";
-import {ITokenUser} from "../_interfaces/user";
+import { Router } from "@angular/router";
+// import { ITokenUser } from "src/app/_interfaces/user";
 import jwtDecode from "jwt-decode";
 
 @Injectable({
@@ -8,60 +8,61 @@ import jwtDecode from "jwt-decode";
 })
 export class TokenService {
 
-  constructor(private router: Router) { }
+  constructor(private _router: Router) { }
 
-  saveToken(token: string): void{
-    localStorage.setItem('token', token)
-    this.router.navigate(['admin'])
+  public saveToken(token: string): void {
+    localStorage.setItem('token', token);
+    this._router.navigate(['admin']);
   }
 
-  isLogged(): boolean{
-    const token = localStorage.getItem('token')
-    return !! token
+  public isLogged(): boolean {
+    const token = localStorage.getItem('token');
+    return !!token;
   }
 
-  isLoggedAsUser(): boolean{
-    const token = localStorage.getItem('token')
-    if(token != null){
-      const decode : any = jwtDecode(token)
-      return !decode.user.isLunchLady
+  public isLoggedAsUser(): boolean {
+    const token = localStorage.getItem('token');
+    if(token != null) {
+      const decode: any = jwtDecode(token);
+      return !decode.user.isLunchLady;
     }
-    return false
+    return false;
   }
 
-  isLoggedAsAdmin(): boolean{
-    const token = localStorage.getItem('token')
-    if(token != null){
-      const decode : any = jwtDecode(token)
-      return decode.user.isLunchLady
+  public isLoggedAsAdmin(): boolean {
+    const token = localStorage.getItem('token');
+    if(token != null) {
+      const decode: any = jwtDecode(token);
+      return decode.user.isLunchLady;
     }
-    return false
+    return false;
   }
 
-  getUserInfo(){
-    const token = localStorage.getItem('token')
-    if(token != null){
-      const decode : any = jwtDecode(token)
-      return decode.user
+  public getUserInfo(): any {
+    const token = localStorage.getItem('token');
+    if(token != null) {
+      const decode: any = jwtDecode(token);
+      return decode.user;
     }
-    return false
+    return false;
   }
 
-  getUserID(){
-    const token = localStorage.getItem('token')
-    if(token != null){
-      const decode : any = jwtDecode(token)
-      return decode.user.id
+  public getUserID(): any {
+    const token = localStorage.getItem('token');
+    if(token != null) {
+      const decode: any = jwtDecode(token);
+      return decode.user.id;
     }
-    return false
+    return false;
   }
 
-  clearToken(): void{
-    localStorage.removeItem('token')
-    this.router.navigate(['/'])
+  public clearToken(): void {
+    localStorage.removeItem('token');
+    this._router.navigate(['/']);
   }
 
-  getToken(): string | null{
-    return localStorage.getItem('token')
+  public getToken(): string | null {
+    return localStorage.getItem('token');
   }
+
 }
