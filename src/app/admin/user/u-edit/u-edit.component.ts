@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {UserService} from "../../../_services/user.service";
-import {ActivatedRoute} from "@angular/router";
-import {IUser} from "../../../_interfaces/user";
+import { ActivatedRoute } from "@angular/router";
+import { UserService } from "../../../_services/user.service";
+import { IUser } from "../../../_interfaces/user";
 @Component({
   selector: 'app-u-edit',
   templateUrl: './u-edit.component.html',
@@ -9,62 +9,37 @@ import {IUser} from "../../../_interfaces/user";
 })
 export class UEditComponent implements OnInit {
 
-  user: IUser = {
-    id: 0,
-    firstname: '',
-    name: '',
-    email: '',
-    phone: '',
-    sex: 0,
-    address: '',
-    postalCode: '',
-    town: '',
-    isLunchLady: 0,
-    wallet: 0,
-    imageId: 0,
-    registrationDate: '',
-    status: ''
-  }
-  amount: number = 0;
+  public user!: IUser;
+  public amount: number = 0;
+  public uid: string | null = this._activatedRoute.snapshot.paramMap.get('uid');
 
-
-  constructor(
-      private activated: ActivatedRoute,
-      private userService: UserService
-  ) { }
+  constructor(private _activatedRoute: ActivatedRoute,
+              private _userService: UserService) { }
 
   ngOnInit(): void {
-    let uid = this.activated.snapshot.paramMap.get('uid')
-
-    console.log(uid)
-    this.userService.getUser(Number(uid)).subscribe(
-        data => {
-          // @ts-ignore
-          this.user = data
-        }
-    )
+    // let uid = this._activatedRoute.snapshot.paramMap.get('uid');
+    // console.log(uid);
+    this._userService.getUser(Number(this.uid)).subscribe( data => {   // Number() => réellement nécessaire ? 
+      // @ts-ignore
+      this.user = data
+    } );
   }
 
-  soldeAccount(){
-    let uid = this.activated.snapshot.paramMap.get('uid')
-
-    this.userService.soldeAccountUser(uid,this.amount).subscribe(
-        data => {
-          // @ts-ignore
-          this.user = data
-        }
-    )
+  /** TODO : mettre un solde de compte à 0 après utilisation de la fonction */
+  soldeAccount(): void {
+    // let uid = this._activatedRoute.snapshot.paramMap.get('uid');
+    this._userService.soldeAccountUser(this.uid, this.amount).subscribe( data => {
+      // @ts-ignore
+      this.user = data;
+    } );
   }
 
-  creditAccount(){
-    let uid = this.activated.snapshot.paramMap.get('uid')
-
-    this.userService.creditAccountUser(uid,this.amount).subscribe(
-        data => {
-          // @ts-ignore
-          this.user = data
-        }
-    )
+  creditAccount(): void {
+    // let uid = this._activatedRoute.snapshot.paramMap.get('uid');
+    this._userService.creditAccountUser(this.uid, this.amount).subscribe( data => {
+      // @ts-ignore
+      this.user = data
+    } );
   }
 
 }

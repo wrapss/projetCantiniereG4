@@ -1,3 +1,8 @@
+.works {
+  font-weight: bolder;
+  background-color: yellow;
+} 
+
 .userDetail{
     padding-top: 50px;
     text-align: center;
