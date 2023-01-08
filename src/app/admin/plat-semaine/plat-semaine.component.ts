@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {DatePipe} from "@angular/common";
-import {MenuService} from "../../_services/menu.service";
-import {IMenu} from "../../_interfaces/menu";
+import { DatePipe } from "@angular/common";
+import { MenuService } from "src/app/_services/menu.service";
+// import { IMenu } from "src/app/_interfaces/menu";
 
 @Component({
   selector: 'app-plat-semaine',
@@ -10,40 +10,32 @@ import {IMenu} from "../../_interfaces/menu";
 })
 export class PlatSemaineComponent implements OnInit {
 
-
-  JoursSemaine = [
+  public JoursSemaine: any[] = [
     {id: 1, name: 'Lundi'},
     {id: 2, name: 'Mardi'},
     {id: 3, name: 'Mercredi'},
     {id: 4, name: 'Jeudi'},
     {id: 5, name: 'Vendredi'},
   ];
-
-  constructor(
-      private datepipe: DatePipe,
-      private menuService: MenuService
-              ) { }
-
-  menus: any = []
-
-  newmenu: any = {
+  public menus: any = [];
+  public newmenu: any = {
     label: '',
     priceDF: 1
-  }
+  };
+
+  constructor(private datepipe: DatePipe,
+              private menuService: MenuService) { }
 
   ngOnInit(): void {
-    this.menuService.getAllMenus().subscribe(
-        data=>  this.menus = data
-    )
+    this.menuService.getAllMenus().subscribe( data => this.menus = data );
     const today = new Date();
     const weekNumber = this.datepipe.transform(today, 'w');
     const dayNumber = this.datepipe.transform(today, 'c');
   }
 
-  addMenu(){
-    console.log('add menu')
-    this.menuService.addMenu(this.newmenu).subscribe(
-        data => console.log(data)
-    )
+  addMenu(): void {
+    // console.log('add menu');
+    this.menuService.addMenu(this.newmenu).subscribe( data => console.log(data) );
   }
+  
 }
