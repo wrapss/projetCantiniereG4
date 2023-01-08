@@ -1,9 +1,18 @@
+.works {
+  font-weight: bolder;
+  background-color: yellow;
+} 
+
 /* Structure */
 table {
-    width: 100%;
+  width: 100%;
+}
+
+a {
+  color: 	rgba(0, 0, 255, 0.747);
 }
 
 .mat-form-field {
-    font-size: 14px;
-    width: 100%;
+  font-size: 14px;
+  width: 100%;
 }
