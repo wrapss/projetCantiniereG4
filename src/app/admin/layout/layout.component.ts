@@ -14,7 +14,8 @@ export class LayoutComponent implements OnInit {
 
   ngOnInit(): void { }
 
-  logout(): void {
+  public logout(): void {
     this._tokenService.clearToken();
   }
+  
 }
