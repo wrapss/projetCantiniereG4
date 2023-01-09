@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ConstraintService } from "src/app/_services/constraint.service";
-import { IContraint } from "src/app/_interfaces/contraint";
+import { ConstraintService } from "../../_services/constraint.service";
+import { IContraint } from "../../_interfaces/contraint";
 
 @Component({
   selector: 'app-configuration',
