@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { MealService } from "src/app/_services/meal.service";
-import { IMeal } from "src/app/_interfaces/meal";
-import { Category } from "src/app/_interfaces/category";
+import { MealService } from "../../_services/meal.service";
+import { IMeal } from "../../_interfaces/meal";
+import { Category } from "../../_interfaces/category";
 
 @Component({
   selector: 'app-carte',
