@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {MatDialog} from "@angular/material/dialog";
+import { MatDialog } from "@angular/material/dialog";
 
 @Component({
   selector: 'app-mdp-oublie',
@@ -8,11 +8,12 @@ import {MatDialog} from "@angular/material/dialog";
 })
 export class MdpOublieComponent implements OnInit {
 
-  constructor(private dialogRef : MatDialog) { }
+  constructor(private _dialogRef : MatDialog) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+  
+  cancelPasswordForgotten(): void {
+    this._dialogRef.closeAll();
   }
-  close(){
-    this.dialogRef.closeAll();
-  }
+  
 }
