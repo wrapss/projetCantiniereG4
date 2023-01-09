@@ -12,7 +12,7 @@ export class MdpOublieComponent implements OnInit {
 
   ngOnInit(): void {}
   
-  cancelPasswordForgotten(): void {
+  public cancelPasswordForgotten(): void {
     this._dialogRef.closeAll();
   }
   
