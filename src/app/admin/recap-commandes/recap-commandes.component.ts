@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { OrderService } from "../../_services/order.service";
 import { formatDate } from "@angular/common";
+import { OrderService } from "../../_services/order.service";
 
 @Component({
   selector: 'app-recap-commandes',
