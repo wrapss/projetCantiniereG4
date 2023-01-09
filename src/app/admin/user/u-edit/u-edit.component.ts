@@ -27,7 +27,7 @@ export class UEditComponent implements OnInit {
   }
 
   /** TODO : mettre un solde de compte à 0 après utilisation de la fonction */
-  soldeAccount(): void {
+  public soldeAccount(): void {
     // let uid = this._activatedRoute.snapshot.paramMap.get('uid');
     this._userService.soldeAccountUser(this.uid, this.amount).subscribe( data => {
       // @ts-ignore
@@ -35,7 +35,7 @@ export class UEditComponent implements OnInit {
     } );
   }
 
-  creditAccount(): void {
+  public creditAccount(): void {
     // let uid = this._activatedRoute.snapshot.paramMap.get('uid');
     this._userService.creditAccountUser(this.uid, this.amount).subscribe( data => {
       // @ts-ignore
