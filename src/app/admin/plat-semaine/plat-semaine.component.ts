@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DatePipe } from "@angular/common";
-import { MenuService } from "src/app/_services/menu.service";
-// import { IMenu } from "src/app/_interfaces/menu";
+import { MenuService } from "../../_services/menu.service";
+// import { IMenu } from "../../_interfaces/menu";
 
 @Component({
   selector: 'app-plat-semaine',
