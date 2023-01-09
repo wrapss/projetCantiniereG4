@@ -33,17 +33,19 @@ export class RecapCommandesComponent implements OnInit {
     this.getOrderFinishForThisWeek();
   }
 
-  setAlert(type: string, message: string, show: boolean) {
-    this.alert.show = show;
-    this.alert.message = message;
-    this.alert.type = type;
+  private getDateOfDay(day: any) {
+    const today = new Date();
+    const dateT = today.getDate() - today.getDay() + day;
+    const date = new Date(today.setDate(dateT));
+    const fridayDate = formatDate(date, 'yyyy-MM-dd', 'fr-FR');
+    return fridayDate;
   }
 
-  getOrderWaitingForThisWeek() {
+  private getOrderWaitingForThisWeek() {
     this._orderService.getOrdersByRangeDate(this.getDateOfDay(0), this.getDateOfDay(6), 0).subscribe( data => { this._orderWaiting = data } );
   }
 
-  getOrderFinishForThisWeek() {
+  private getOrderFinishForThisWeek() {
     this._orderService.getOrdersByRangeDate(this.getDateOfDay(0), this.getDateOfDay(6), 1).subscribe(
       data => {
         console.log(data);
@@ -52,7 +54,17 @@ export class RecapCommandesComponent implements OnInit {
     )
   }
 
-  delivryOrder(id: number) {
+  public setAlert(type: string, message: string, show: boolean) {
+    this.alert.show = show;
+    this.alert.message = message;
+    this.alert.type = type;
+  }
+
+  public getOrdersWaitingByDay(date: any) {
+    return this._orderWaiting.filter( (f: any) => f.creationDate == date );
+  }
+
+  public delivryOrder(id: number) {
     this._orderService.deliveryOrder(id).subscribe(
       () => {
         this.setAlert('success', 'Commande livrée!', true);
@@ -61,7 +73,7 @@ export class RecapCommandesComponent implements OnInit {
     )
   }
   
-  cancelOrder(id: number) {
+  public cancelOrder(id: number) {
     this._orderService.cancelOrder(id).subscribe(
       () => {
         this.setAlert('success', 'Commande annulée!', true);
@@ -70,19 +82,8 @@ export class RecapCommandesComponent implements OnInit {
     )
   }
 
-  getOrdersWaitingByDay(date: any) {
-    return this._orderWaiting.filter( (f: any) => f.creationDate == date );
-  }
-
-  getOrdersFinishByDay(date:any){
+  public getOrdersFinishByDay(date:any){
     return this._ordersFinish.filter( (f: any) => f.creationDate == date );
   }
 
-  getDateOfDay(day: any) {
-    const today = new Date();
-    const dateT = today.getDate() - today.getDay() + day;
-    const date = new Date(today.setDate(dateT));
-    const fridayDate = formatDate(date, 'yyyy-MM-dd', 'fr-FR');
-    return fridayDate;
-  }
 }
