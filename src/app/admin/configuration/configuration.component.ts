@@ -34,7 +34,7 @@ export class ConfigurationComponent implements OnInit {
     );
   }
 
-  onSubmit() {
+  public onSubmit() {
     this.constraint.orderTimeLimit = this.constraint.hours + ':'+ this.constraint.minute + ':00';
     this._constraintService.setConstraint(this.constraint).subscribe( data => console.log(data) );
   }
