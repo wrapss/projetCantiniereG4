@@ -23,19 +23,19 @@ export class PlatSemaineComponent implements OnInit {
     priceDF: 1
   };
 
-  constructor(private datepipe: DatePipe,
-              private menuService: MenuService) { }
+  constructor(private _datepipe: DatePipe,
+              private _menuService: MenuService) { }
 
   ngOnInit(): void {
-    this.menuService.getAllMenus().subscribe( data => this.menus = data );
+    this._menuService.getAllMenus().subscribe( data => this.menus = data );
     const today = new Date();
-    const weekNumber = this.datepipe.transform(today, 'w');
-    const dayNumber = this.datepipe.transform(today, 'c');
+    const weekNumber = this._datepipe.transform(today, 'w');
+    const dayNumber = this._datepipe.transform(today, 'c');
   }
 
-  addMenu(): void {
+  public addMenu(): void {
     // console.log('add menu');
-    this.menuService.addMenu(this.newmenu).subscribe( data => console.log(data) );
+    this._menuService.addMenu(this.newmenu).subscribe( data => console.log(data) );
   }
   
 }
