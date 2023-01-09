@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
 import { UserService } from "../../../_services/user.service";
 import { IUser } from "../../../_interfaces/user";
+
 @Component({
   selector: 'app-u-edit',
   templateUrl: './u-edit.component.html',
