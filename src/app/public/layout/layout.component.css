@@ -1,15 +1,35 @@
+.works {
+  font-weight: bolder;
+  background-color: yellow;
+} 
+
+a {
+  margin: 0 10px;
+  /* color: #333; */
+  color: 	#9370DB;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.active {
+  color: #8A2BE2;
+  text-decoration: underline;
+}
+
 .nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
   background: #a29e9e;
 }
+
 .nav ul li {
   list-style-type: none;
   display: inline-block;
   padding: 10px 20px;
 }
-.container{
+
+.container {
   padding-left: 13rem;
   padding-right: 13rem;
 }
