@@ -1,0 +1,40 @@
+mot de passe oublié ? How faire fonctionner avec envoi adresse mail ?
+affectation des plats sur carte des plats de la semaine : comment affecte le plat 1  et plat 2 pour jour ? système actuel fait que l'affectation est random
+
+inteface credentials.ts :
+  TODO : vérifier utilisation réelle dans projet de "ICredentialsRegister" et "ICredentials"
+
+- user-routing.module.ts : 
+  TODO : tester de renvoyer ces routes dans admin-routing.module.ts, as routes-enfant. 
+         => Best practice pour ce genre de cas = ? on stocke tout dans le même routing-module ?
+
+- user.module.ts :
+  TODO : vérifier que suppression de "providers" posse pas de problème dan sle template. Si non, virer totalement.
+
+- user.service.ts :
+  TODO : vérifier le fonctionnement et la bonne pratique des méthodes "soldeAccountUser()" et "creditAccountUser()" : 
+    - correct comme façon de faire ? 
+    manque pas le typage de retour ?
+    - ".subscribe" derrière ? 
+    - Corps de la requête vide en 2e argument ? 
+    - Voir la doc de Swagger projet pour voir
+
+- u-edit.component :
+  TODO : faire une fonction pour mettre à 0 le solde du user (si pas déjà fait dans user.service.ts ?) VOIRE :
+    - nécessaire de refaire une méthode dans u-edit pour rappeler une méthode déjà existante dans user.service.ts ?
+
+- mdp-oublie.component.ts :
+  TODO : rajouter popup validation envoi du mdp de récupération
+    <button (click)="" > Valider </button>
+
+- modal-login.component.ts :
+  TODO : méthode "login()" avec élément déprécié ? Déjà corrigé ou pas ?
+
+- modal-login, modal-register, mdp-oublie :
+  TODO : appellent tous une méthode "close()" avec "dialogRef.closeAll()" : pas possible de mettre méthode dans un servcie unique, et uniquement l'appeler ensuite sans la re-définir dans chaque component ? Ou pas ? Sinon, laisser comme tel
+
+- modal-register.component.ts :
+  TODO : vérifier "gender" dans IcredentialsRegister et la doc Swagger fournie par prof
+
+- carte-component.component.ts :
+  TODO : ajouter les icones de menus
