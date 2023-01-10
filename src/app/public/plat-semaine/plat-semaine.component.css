@@ -1,15 +1,19 @@
-.main{
+.works {
+  font-weight: bolder;
+  background-color: yellow;
+} 
+
+.main {
   padding-left: 5%;
   padding-right: 5%;
 }
 
-.semaine{
+.semaine {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-
-
 }
-.jours{
+
+.jours {
   min-width: 600px;
 }
