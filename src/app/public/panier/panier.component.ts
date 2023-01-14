@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {CartService} from "../../_services/cart.service";
-import {TokenService} from "../../_services/token.service";
-import {UserService} from "../../_services/user.service";
-import {IUser} from "../../_interfaces/user";
-import {OrderService} from "../../_services/order.service";
+import { CartService } from "../../_services/cart.service";
+import { TokenService } from "../../_services/token.service";
+import { UserService } from "../../_services/user.service";
+import { OrderService } from "../../_services/order.service";
+import { IMenuReduced } from '../../_interfaces/menu';
 
 @Component({
   selector: 'app-panier',
@@ -12,96 +12,85 @@ import {OrderService} from "../../_services/order.service";
 })
 export class PanierComponent implements OnInit {
 
-  user: IUser = {
-    id: 0,
-    firstname: '',
-    name: '',
-    email: '',
-    phone: '',
-    sex: 0,
-    address: '',
-    postalCode: '',
-    town: '',
-    isLunchLady: 0,
-    wallet: 0,
-    imageId: 0,
-    registrationDate: '',
-    status: ''
-  }
-
-  JoursSemaine = [
-    {id: 1, name: 'Lundi'},
-    {id: 2, name: 'Mardi'},
-    {id: 3, name: 'Mercredi'},
-    {id: 4, name: 'Jeudi'},
-    {id: 5, name: 'Vendredi'},
+  public joursSemaine: any[] = [
+    { id: 1, name: "Lundi" },
+    { id: 2, name: "Mardi" },
+    { id: 3, name: "Mercredi" },
+    { id: 4, name: "Jeudi" },
+    { id: 5, name: "Vendredi" },
   ];
-
-
-  alert =  {
-    message: '',
+  public alert: any =  {
+    message: "",
     show: false,
-    type: ''
+    type: ""
   }
+  public cardBalance!: number;
+  private _userId!: number;
 
-  constructor(protected cartService: CartService,
-              protected tokenService: TokenService,
-              protected userService: UserService,
-              protected orderService: OrderService
-  ) { }
-
-
+  constructor(private _cartService: CartService,
+              private _tokenService: TokenService,
+              private _userService: UserService,
+              private _orderService: OrderService) { }
 
   ngOnInit(): void {
-    this.cartService.getTotalBalanceCart()
+    this._userId = +this._tokenService.getUserInfo().id;
+    this.cardBalance = this._cartService.getTotalBalanceCart();
   }
 
-  removeCartItem(id: any){
-    this.cartService.removeLocalCartProduct(id)
+  public setAlert(type: string, message: string, show: boolean) {
+    this.alert.type = type;
+    this.alert.message = message;
+    this.alert.show = show;
   }
 
-
-  getPlatByJours(jours : any){
-    return this.cartService.getLocalCartProducts().filter((f) => f.jours == jours)
+  public getPlatByJours(jour: string): IMenuReduced[] {
+    let menu: IMenuReduced[] = this._cartService.getLocalCartProducts().filter( (f) => f.jour == jour );
+    // console.log("menu IMenuReduced[]", menu);
+    return menu;
+    // return this._cartService.getLocalCartProducts().filter( (f) => f.jours == jour );
   }
 
-  setAlert(type:string, message:string, show:boolean){
-    this.alert.show = show
-    this.alert.message = message
-    this.alert.type = type
+  public removeCartItem(id: number): void {
+    this._cartService.removeLocalCartProduct(id);
   }
 
-  confirmOrder(){
-    this.setAlert('','',false)
-    let userId = this.tokenService.getUserInfo().id;
-    this.userService.getUser(userId).subscribe(
-        data => {
+  public userLogged(): boolean {
+    return this._tokenService.isLoggedAsUser();
+  }
+
+  public adminLogged(): boolean {
+    return this._tokenService.isLoggedAsAdmin();
+  }
+
+  public confirmOrder(): void {
+    this.setAlert("", "", false);
+    this._userService.getUser(this._userId).subscribe(
+      data => {
+        let user = data;
+        let total = this._cartService.getTotalBalanceCart();
+        let panier = this._cartService.getLocalCartProducts();
+        if (panier.length !== 0) {
           // @ts-ignore
-          let user = data
-          let total = this.cartService.getTotalBalanceCart();
-          let panier = this.cartService.getLocalCartProducts();
-          if(panier.length !== 0){
+          if (user.wallet >= total) {
             // @ts-ignore
-            if(user.wallet >= total){
-              // @ts-ignore
-              this.orderService.createOrder(user.id).subscribe(
-                  data => {
-                    console.log(data)
-                    this.cartService.removeLocalCart()
-                    this.setAlert('success',`Commande validé`,true)
-                  },
-                  error => {
-                    console.log(error)
-                    this.setAlert('danger',`Heure de commande dépassé`,true)
-                  }
-              )
-            }else{
-              this.setAlert('danger',`Votre n'avez pas assez de crédit`,true)
-            }
-          }else{
-            this.setAlert('danger','Votre panier est vide!',true)
+            this._orderService.createOrder(user.id).subscribe(
+              (data: any) => {
+                console.log("_orderService.createOrder(user.id)", data);
+                this._cartService.removeLocalCart();
+                this.setAlert("success", "Commande validée", true);
+              },
+              (error: any) => {
+                console.log(error);
+                this.setAlert("danger", "Heure de commande dépassée", true);
+              }
+            )
+          } else {
+            this.setAlert("danger", "Crédits insuffisants, commande impossible", true);
           }
+        } else {
+          this.setAlert("danger", "Votre panier est vide !", true);
         }
+      }
     )
   }
 

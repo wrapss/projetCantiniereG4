@@ -1,21 +1,27 @@
-import {IUser} from "./user";
-
-export interface IMenu{
-    id: number,
-    label: string,
-    priceDF: string,
-    availableForWeeksAndDays: IValueAvailable[],
-    imageId: string,
-    meals: string,
-    status: string,
+export interface IMenu {
+  id: number;
+  label: string;
+  priceDF: string;
+  availableForWeeksAndDays: IValueAvailable[];
+  imageId: string;
+  meals: string;
+  status: string;
 }
 
-export interface IDataMenu{
-    data: IMenu[]
-
+export interface IMenuReduced {
+  id: number;
+  label: string;
+  priceDF: string;
+  jour: string;
 }
 
-export interface IValueAvailable{
-    day: number,
-    week: number
+export interface IValueAvailable {
+  day: number;
+  week: number;
 }
+
+// export interface IDataMenu {
+//   data: IMenu[];
+// }
+
+

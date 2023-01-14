@@ -1,33 +1,44 @@
 <div class="main">
-    <p>mon-compte works!</p>
-    <div class="userInfo">
-        <div class="info">
-            <div class="item">
-                <label for="">Prénom : </label>
-                <input type="text"  [(ngModel)]="userInfo.firstname" name="firstname" id="firstname">
-            </div>
-            <div class="item">
-                <label for="">Nom : </label>
-                <input type="text" [(ngModel)]="userInfo.name" name="name" id="name">
-            </div>
-            <div class="item">
-                <label for="">Addresse mail : </label>
-                <input type="text" [(ngModel)]="userInfo.email" name="email" id="email">
-            </div>
-            <div class="item">
-                <label for="">Mot de passe : </label>
-                <input type="text" value="****" disabled>
-                <button (click)="showPasswordChange()">-></button>
-            </div>
-            <div class="pass" *ngIf="showPassword">
-                <input type="text" placeholder="Ancien mot de passe">
-                <input type="text" placeholder="Nouveau mot de passe">
-                <input type="text" placeholder="Confirmation du mot de passe">
-            </div>
-            <div class="button">
-                <button (click)="editUser()">Valider mes modifications</button>
+  <p class="works"> Edit-component works ! </p>   <!-- A SUPPRIMER + class "works" ds .css -->
 
-            </div>
-        </div>
+  <div class="userInfo">
+    <div class="info">
+
+      <div class="item">
+        <label for="prenom"> Prénom : 
+          <input type="text"  [(ngModel)]="userInfo.firstname" name="firstname" id="firstname"> 
+        </label>
+      </div>
+
+      <div class="item">
+        <label for="nom"> Nom :
+          <input type="text" [(ngModel)]="userInfo.name" name="name" id="name"> 
+        </label>
+      </div>
+
+      <div class="item">
+        <label for="email"> Adresse mail : 
+          <input type="text" [(ngModel)]="userInfo.email" name="email" id="email">
+        </label>
+      </div>
+
+      <div class="item">
+        <label for="pwd"> Mot de passe : 
+          <input type="text" value="****" disabled>
+        </label>
+        <button (click)="showPasswordChange()"> Modifier <mat-icon> forward </mat-icon></button>
+      </div>
+
+      <div class="pass" *ngIf="showPassword">
+        <input type="text" placeholder="Ancien mot de passe">
+        <input type="text" placeholder="Nouveau mot de passe">
+        <input type="text" placeholder="Confirmation du mot de passe">
+      </div>
+
+      <div class="button">
+        <button routerLink="/auth/user" (click)="editUser()"> Valider mes modifications </button>
+      </div>
+
     </div>
+  </div>
 </div>

@@ -1,8 +1,14 @@
-.semaine{
-    justify-content: center;
-    display: flex;
-    flex-wrap: wrap;
+.works {
+  font-weight: bolder;
+  background-color: yellow;
+} 
+
+.semaine {
+  justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
 }
-.jours{
-    min-width: 500px;
+
+.jours {
+  min-width: 500px;
 }
