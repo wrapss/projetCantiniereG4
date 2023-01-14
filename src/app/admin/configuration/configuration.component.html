@@ -1,16 +1,21 @@
-<p>configuration works!</p>
+<p class="works"> Configuration-component works! </p>   <!-- A SUPPRIMER + class "works" ds .css -->
+
 <form #f="ngForm" name="form" (ngSubmit)="onSubmit()">
-    <div class="form-group">
-        <label for="">Nombre limite de plat:</label>
-        <input type="text" name="nbrPlat" [(ngModel)]="constraint.maximumOrderPerDay" #nbrPlat="ngModel">
-    </div>
-    <div class="form-group">
-        <label for="">Heure limite pour passer commande:</label>
-        <input type="text"name="hours" [(ngModel)]="constraint.hours">
-        <label for=""> H</label>
-        <input type="text" name="minute" [(ngModel)]="constraint.minute" >
-    </div>
-    <div class="form-group">
-        <button>Valider</button>
-    </div>
+
+  <div class="form-group">
+    <label> Nombre limite de plats : </label>
+    <input type="text" name="nbrPlat" [(ngModel)]="constraint.maximumOrderPerDay" #nbrPlat="ngModel">
+  </div>
+
+  <div class="form-group">
+    <label> Heure limite pour passer commande : </label>
+    <input type="text"name="hours" [(ngModel)]="constraint.hours">
+    <label> H </label>
+    <input type="text" name="minute" [(ngModel)]="constraint.minute">
+  </div>
+
+  <div class="form-group">
+    <button> Valider </button>
+  </div>
+
 </form>

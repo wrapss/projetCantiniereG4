@@ -1,18 +1,25 @@
-.main{
+.works {
+  font-weight: bolder;
+  background-color: yellow;
+} 
+
+.main {
   padding-left: 5%;
   padding-right: 5%;
 }
 
-.carte{
+.carte {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
 
 }
-.categorie{
+
+.categorie {
   width: 200px;
 }
-.item{
+
+.item {
   display: flex;
   height: 30px;
   align-items: center;

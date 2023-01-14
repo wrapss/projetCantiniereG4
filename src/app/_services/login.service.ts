@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import { Observable } from 'rxjs';
-import {IDataUser} from "../_interfaces/user";
+// import { IDataUser } from "../_interfaces/user";
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
 export class UserService {
 
-    constructor(private http: HttpClient) { }
+  constructor(private _http: HttpClient) { }
 
+  public getAllUsers(): Observable<Object> {
+    return this._http.get('http://localhost:8080/stone.lunchtime/user/findall');
+  }
 
-    getAllUsers(){
-        return this.http.get('http://localhost:8080/stone.lunchtime/user/findall')
-    }
 }

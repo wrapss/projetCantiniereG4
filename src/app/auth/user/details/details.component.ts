@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {TokenService} from "../../../_services/token.service";
-import {IUser} from "../../../_interfaces/user";
-import {OrderService} from "../../../_services/order.service";
-import {UserService} from "../../../_services/user.service";
+import { TokenService } from "../../../_services/token.service";
+import { OrderService } from "../../../_services/order.service";
+import { UserService } from "../../../_services/user.service";
+import { IUser } from "../../../_interfaces/user";
 
 @Component({
   selector: 'app-details',
@@ -10,12 +10,8 @@ import {UserService} from "../../../_services/user.service";
   styleUrls: ['./details.component.css']
 })
 export class DetailsComponent implements OnInit {
-  constructor(private tokenService: TokenService,
-              private orderService: OrderService,
-              private userService: UserService,
-              ) { }
 
-  userInfo : IUser = {
+  /*userInfo : IUser = {
     id:0,
     firstname: '',
     name: '',
@@ -30,20 +26,23 @@ export class DetailsComponent implements OnInit {
     imageId: 0,
     registrationDate: '',
     status: ''
-  }
-  orderUnconfirmed: any = []
+  }*/ 
+  public userInfo!: IUser;
+  public orderUnconfirmed: any = [];
+
+  constructor(private _tokenService: TokenService,
+              private _orderService: OrderService,
+              private _userService: UserService) { }
+
   ngOnInit(): void {
-    const userID = this.tokenService.getUserID()
+    const userID = this._tokenService.getUserID()
     console.log(userID)
-    this.userService.getUser(userID).subscribe(
-        data=> this.userInfo = data as IUser
-    )
-
-
-    this.orderService.getOrdersUnconfirmedByUser(userID).subscribe(
-        data=> this.orderUnconfirmed = data
-    )
+    this._userService.getUser(userID).subscribe(
+      data => this.userInfo = data as IUser
+    );
+    this._orderService.getOrdersUnconfirmedByUser(userID).subscribe(
+        data => this.orderUnconfirmed = data
+    );
   }
-
 
 }

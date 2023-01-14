@@ -1,35 +1,47 @@
-.main{
-    padding-right: 10%;
-    padding-left: 10%;
-}
-.userInfo{
-    display: flex;
-    justify-content: space-between;
-}
-.item{
-    display: flex;
-    align-items: center;
-    padding-top: 20px;
+.works {
+  font-weight: bolder;
+  background-color: yellow;
+} 
+
+.main {
+  padding-right: 10%;
+  padding-left: 10%;
 }
 
-.commandes{
-    padding-top: 50px;
+.userInfo {
+  display: flex;
+  justify-content: space-between;
 }
-.commande_title{
-    text-align: center;
+
+.item {
+  display: flex;
+  align-items: center;
+  padding-top: 20px;
 }
-.tableau{
-    margin: auto;
+
+.commandes {
+  padding-top: 50px;
 }
-.actions{
-    padding-top: 50px;
-    display: flex;
-    justify-content: space-between;
+
+.commande_title {
+  text-align: center;
 }
-.pass{
-    display: grid;
-    padding-top: 25px;
+
+.tableau {
+  margin: auto;
 }
-.button{
-    padding-top: 30px;
+
+.actions {
+  padding-top: 50px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.pass {
+  display: grid;
+  padding-top: 25px;
+}
+
+.button {
+  padding-top: 30px;
 }

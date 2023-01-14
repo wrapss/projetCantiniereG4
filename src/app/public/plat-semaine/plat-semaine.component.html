@@ -1,23 +1,20 @@
 <div class="main">
-  <div class="semaine">
-    <div class="jours" *ngFor="let JourSemaine of JoursSemaine" >
-      <h2>{{JourSemaine.name}}</h2>
-     <div *ngFor="let platJour of getPlatByJours(JourSemaine.name)">
-        <span>{{platJour.label}} - </span>
-        <span>{{platJour.priceDF}} €</span>
 
-        <button (click)="onSubmitCart(platJour)">Ajouter au panier1</button>
+  <p class="works"> Plat-Semaine-component works! </p>   <!-- A SUPPRIMER + class "works" ds .css -->
+
+  <div class="semaine">
+    <div class="jours" *ngFor="let jour of JoursSemaine" >
+
+      <h2> {{ jour.name }} </h2>
+
+      <div *ngFor="let platJour of getPlatByJours(jour.name)">
+        <span> {{ platJour.label }} - </span>
+        <span> {{ platJour.priceDF | currency: 'EUR' }} </span>
+        <button (click)="onSubmitCart(platJour)"> Ajouter au panier </button>
       </div>
     </div>
   </div>
 
-    <hr>
-    <div class="semaine">
-        <div class="jours" *ngFor="let JourSemaine of JoursSemaine">
-            <h2>{{JourSemaine.name}}</h2>
-
-        </div>
-    </div>
 </div>
 
 

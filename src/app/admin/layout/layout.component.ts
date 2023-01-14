@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {TokenService} from "../../_services/token.service";
+import { TokenService } from "../../_services/token.service";
 
 @Component({
   selector: 'app-layout',
@@ -8,13 +8,14 @@ import {TokenService} from "../../_services/token.service";
 })
 export class LayoutComponent implements OnInit {
 
-  constructor(private tokenService: TokenService) { }
+  constructor(private _tokenService: TokenService) { }
 
-  public isAuth: boolean = this.tokenService.isLoggedAsAdmin();
+  public isAuth: boolean = this._tokenService.isLoggedAsAdmin();
 
-  ngOnInit(): void {
+  ngOnInit(): void { }
+
+  public logout(): void {
+    this._tokenService.clearToken();
   }
-  logout(): void{
-    this.tokenService.clearToken()
-  }
+  
 }

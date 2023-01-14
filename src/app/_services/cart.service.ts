@@ -1,66 +1,65 @@
-
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import { IProduct} from "../_interfaces/product";
-import {IMenu} from "../_interfaces/menu";
+import { IMenuReduced } from "../_interfaces/menu";
+
+// import { HttpClient } from "@angular/common/http";
+// import { IProduct } from "../_interfaces/product";
+// import { IMenu, IMenuReduced } from "../_interfaces/menu";
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
 export class CartService {
+  
+  // @ts-ignore
+  // private _mealsList: IMenu[] = JSON.parse(localStorage.getItem("cart_items")) || [];
+  // @ts-ignore
+  private _mealsListReduced: IMenuReduced[] = JSON.parse(localStorage.getItem("cart_items")) || [];   // Use _mealsListReduced & IMenuReduced for PanierComponent
 
-    constructor() {}
+  constructor() {}
 
-    addToCart(data: IMenu): void {
-        // @ts-ignore
-        const a: IMenu[] = JSON.parse(localStorage.getItem("cart_items")) || [];
-        a.push(data);
-        setTimeout(() => {
-            localStorage.setItem("cart_items", JSON.stringify(a));
-        }, 500);
+  public addToCart(data: IMenuReduced): void {
+    this._mealsListReduced.push(data);
+    // console.log("this._mealsListReduced", this._mealsListReduced);
+    setTimeout(() => {
+      localStorage.setItem("cart_items", JSON.stringify(this._mealsListReduced));
+    }, 500);
+  }
+
+  // Removing cart from local
+  public removeLocalCartProduct(id: number): void {
+    for (let i = 0; i < this._mealsListReduced.length; i++) {
+      if (this._mealsListReduced[i]['id'] === id) {
+        this._mealsListReduced.splice(i, 1);
+        break;
+      }
     }
+    // ReAdding the mealsList after remove
+    // console.log("_mealsList after splice", this._mealsListReduced);
+    return localStorage.setItem("cart_items", JSON.stringify(this._mealsListReduced));
+  }
 
-    // Removing cart from local
-    removeLocalCartProduct(id: any) {
-        // @ts-ignore
-        const products: IMenu[] = JSON.parse(localStorage.getItem("cart_items"));
+  public removeLocalCart(): void {
+    localStorage.removeItem("cart_items");
+  }
 
-        for (let i = 0; i < products.length; i++) {
-            if (products[i]['id'] === id) {
-                products.splice(i, 1);
-                break;
-            }
-        }
-        // ReAdding the products after remove
-        localStorage.setItem("cart_items", JSON.stringify(products));
-    }
+  // Fetching Local CartsProducts
+  public getLocalCartProducts(): IMenuReduced[] {
+    return this._mealsListReduced;
+  }
 
-    removeLocalCart() {
-        localStorage.removeItem("cart_items");
-    }
+  public getCountCartProducts(): number {
+    return this._mealsListReduced.length;
+  }
 
-    // Fetching Locat CartsProducts
-    getLocalCartProducts(){
-        // @ts-ignore
-        const products: Any [] = JSON.parse(localStorage.getItem("cart_items")) || [];
-
-        return products;
-    }
-
-    getCountCartProducts(){
-        // @ts-ignore
-        const products: Any [] = JSON.parse(localStorage.getItem("cart_items")) || [];
-        return products.length;
-    }
-
-    getTotalBalanceCart(){
-        let total = 0;
-        // @ts-ignore
-        const products: IMenu [] = JSON.parse(localStorage.getItem("cart_items")) || [];
-        products.map((f) => {
-            total = total + Number(f.priceDF)
-        })
+  public getTotalBalanceCart(): number {
+    let total: number = 0;
+    this._mealsListReduced.map((meal) => {
+      // console.log("meal :", meal);
+      // console.log("this._mealsListReduced after .map() : ", this._mealsListReduced);
+      total = total + Number(meal.priceDF)
+    })
     return total;
-    }
+  }
+
 }
 

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {IUser} from "../../../_interfaces/user";
-import {TokenService} from "../../../_services/token.service";
-import {UserService} from "../../../_services/user.service";
+import { IUser } from "../../../_interfaces/user";
+import { TokenService } from "../../../_services/token.service";
+import { UserService } from "../../../_services/user.service";
 
 @Component({
   selector: 'app-edit',
@@ -10,13 +10,7 @@ import {UserService} from "../../../_services/user.service";
 })
 export class EditComponent implements OnInit {
 
-  constructor(private tokenService: TokenService,
-              private userService: UserService
-  ) { }
-
-  showPassword = false;
-
-  userInfo : IUser = {
+  /*userInfo : IUser = {
     id:0,
     firstname: '',
     name: '',
@@ -28,33 +22,37 @@ export class EditComponent implements OnInit {
     town: '',
     isLunchLady: 0,
     imageId: 0,
-
     wallet: 0,
     registrationDate: '',
     status: ''
   }
-  userID:any =  0
+  userID: any = 0;
+  */
+  public userInfo!: IUser;
+  public showPassword: boolean = false;
 
-  showPasswordChange(){
-    console.log(this.showPassword)
-    if(this.showPassword){
-      this.showPassword = false
-    }
-    this.showPassword = true
-  }
-
-  editUser(){
-    this.userService.editUser(this.userInfo.id,this.userInfo).subscribe(
-        data=> console.log(data)
-    )
-  }
+  constructor(private _tokenService: TokenService,
+              private _userService: UserService) { }
 
   ngOnInit(): void {
-    var userID = this.tokenService.getUserID();
-    this.userService.getUser(Number(userID)).subscribe(
-        data=> this.userInfo =data as IUser
-    )
+    let userID = this._tokenService.getUserID();
+    this._userService.getUser(Number(userID)).subscribe(
+      data => this.userInfo = data as IUser
+    );
+  }
 
+  public showPasswordChange(): boolean {
+    console.log(this.showPassword);
+    if (this.showPassword) {
+      return this.showPassword = false;
+    }
+    return this.showPassword = true;
+  }
+
+  public editUser(): void {
+    this._userService.editUser(this.userInfo.id, this.userInfo).subscribe(
+      data => console.log(data)
+    );
   }
 
 }

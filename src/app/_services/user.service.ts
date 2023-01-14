@@ -1,35 +1,32 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import { Observable } from 'rxjs';
-import {IDataUser} from "../_interfaces/user";
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
+  constructor(private _http: HttpClient) { }
 
-
-  constructor(private http: HttpClient) { }
-
-
-  getAllUsers(){
-    return this.http.get('http://localhost:8080/stone.lunchtime/user/findall')
+  public getAllUsers(): Observable<Object> {
+    return this._http.get('http://localhost:8080/stone.lunchtime/user/findall');
   }
 
-  getUser(id: number){
-    return this.http.get('http://localhost:8080/stone.lunchtime/user/find/'+id)
+  public getUser(id: number): Observable<Object> {
+    return this._http.get('http://localhost:8080/stone.lunchtime/user/find/' + id);
   }
 
-  soldeAccountUser(uid:any,amount:number){
-    return this.http.post('http://localhost:8080/stone.lunchtime/user/debit/'+uid+'?amount='+amount,{})
+  public soldeAccountUser(uid: string | null, amount: number): Observable<Object> {
+    return this._http.post('http://localhost:8080/stone.lunchtime/user/debit/' + uid + '?amount=' + amount, {});   
   }
 
-  creditAccountUser(uid:any,amount:number){
-    return this.http.post('http://localhost:8080/stone.lunchtime/user/credit/'+uid+'?amount='+amount,{})
+  public creditAccountUser(uid: string | null, amount: number): Observable<Object> {
+    return this._http.post('http://localhost:8080/stone.lunchtime/user/credit/' + uid + '?amount=' + amount, {});   
   }
 
-  editUser(userID:any,user:any){
-    return this.http.patch('http://localhost:8080/stone.lunchtime/user/update/'+userID,user)
+  public editUser(userID: any, user: any): Observable<Object> {
+    return this._http.patch('http://localhost:8080/stone.lunchtime/user/update/' + userID, user);
   }
+  
 }

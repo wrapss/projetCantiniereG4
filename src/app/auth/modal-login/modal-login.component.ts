@@ -1,10 +1,10 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
-import {ICredentials} from "../../_interfaces/credentials";
-import {TokenService} from "../../_services/token.service";
-import {ModalRegisterComponent} from "../modal-register/modal-register.component";
-import {MdpOublieComponent} from "../mdp-oublie/mdp-oublie.component";
-import {AuthService} from "../../_services/auth.service";
+import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { ICredentials } from "../../_interfaces/credentials";
+import { TokenService } from "../../_services/token.service";
+import { AuthService } from "../../_services/auth.service";
+import { ModalRegisterComponent } from "../modal-register/modal-register.component";
+import { MdpOublieComponent } from "../mdp-oublie/mdp-oublie.component";
 
 @Component({
   selector: 'app-modal-login',
@@ -12,37 +12,40 @@ import {AuthService} from "../../_services/auth.service";
   styleUrls: ['./modal-login.component.css']
 })
 export class ModalLoginComponent  {
-  form: ICredentials = {
+
+  public form: ICredentials = {
     email: '',
     password: ''
-  }
-  alerte = false
-  constructor(
-    private tokenService: TokenService,
-    private dialogRef : MatDialog,
-    private authService: AuthService) {
-  }
-  close(){
-    this.dialogRef.closeAll();
+  };
+  public alerte = false;
+
+  constructor(private _tokenService: TokenService,
+              private _dialogRef : MatDialog,
+              private _authService: AuthService) {}
+
+  public close(): void {
+    this._dialogRef.closeAll();
   }
 
-  openDialogRegister(){
-    this.dialogRef.open(ModalRegisterComponent);
+  public openDialogRegister(): void {
+    this._dialogRef.open(ModalRegisterComponent);
   }
 
-  openDialogPassword(){
-    this.dialogRef.open(MdpOublieComponent);
+  public openDialogPassword(): void {
+    this._dialogRef.open(MdpOublieComponent);
   }
-  login() {
-     this.authService.login(this.form).subscribe(
+
+  public login(): void {
+    this._authService.login(this.form).subscribe(
       data => {
          //@ts-ignore
-        this.tokenService.saveToken(data.headers.get('Authorization'))
-        this.dialogRef.closeAll();
+        this._tokenService.saveToken(data.headers.get('Authorization'))
+        this._dialogRef.closeAll();
       },
       err => {
-        this.alerte = true
-      }
+        this.alerte = true;
+      } 
     )
   }
+  
 }

@@ -1,8 +1,8 @@
-import {IUser} from "./user";
+// import {IUser} from "./user";
 
-export interface IMeal{
-    id: number,
-    label: string,
-    priceDF: string,
-    category: number
+export interface IMeal {
+  id: number;
+  label: string;
+  priceDF: string;
+  category: number;
 }

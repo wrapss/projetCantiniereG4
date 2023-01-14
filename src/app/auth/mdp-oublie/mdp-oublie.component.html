@@ -1,12 +1,17 @@
-<form >
+<form>
 
+  <p class="works"> mdp-oublie-component works! </p>   <!-- A SUPPRIMER + class "works" ds .css -->
 
-    <div class="group">
-        <label for="email">Email</label>
-        <input type="text" id="email" placeholder="Adresse email" name="email">
-    </div>
-    <div class="group">
-        <button (click)="close()">Annuler</button>
-        <button>Valider</button>
-    </div>
+  <div class="group">
+    <label for="email"> Email </label>
+    <input type="text" id="email" placeholder="Adresse email" name="email">
+  </div>
+
+  <div class="group">
+    <button (click)="cancelPasswordForgotten()"> Annuler </button>
+    <button> Valider </button>
+    <!-- TODO: Rajouter popup validation envoi du mdp de récupération
+    <button (click)="" > Valider </button> -->
+  </div>
+
 </form>

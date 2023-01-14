@@ -1,43 +1,44 @@
-// http://localhost:8080/stone.lunchtime/order/findall
-
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
+import { Observable } from 'rxjs';
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
 export class OrderService {
 
-    constructor(private http: HttpClient) { }
+  constructor(private _http: HttpClient) { }
 
-    getAllOrders(){
-        return this.http.get('http://localhost:8080/stone.lunchtime/order/findall')
-    }
+  public getAllOrders(): Observable<Object> {
+    return this._http.get('http://localhost:8080/stone.lunchtime/order/findall');
+  }
 
-    getOrdersByRangeDate(beginDate:any, endDate:any,state:number){
-        return this.http.get('http://localhost:8080/stone.lunchtime/order/findallbetweendateinstatus?status='+state+'&beginDate='+beginDate+'&endDate='+endDate)
-    }
+  public getOrdersByRangeDate(beginDate: any, endDate: any, state: number): Observable<Object> {
+    return this._http.get('http://localhost:8080/stone.lunchtime/order/findallbetweendateinstatus?status=' + state + '&beginDate=' + beginDate + '&endDate=' + endDate);
+  }
 
-    createOrder(userId:any){
-        return this.http.put('http://localhost:8080/stone.lunchtime/order/add',{
-            "userId": userId,
-            "quantity": [
-                {
-                    "quantity": 1,
-                    "menuId": 2
-                }
-            ]
-        })
-    }
+  public createOrder(userId: any): Observable<Object> {
+    return this._http.put('http://localhost:8080/stone.lunchtime/order/add', {
+      "userId": userId,
+      "quantity": [
+        {
+          "quantity": 1,
+          "menuId": 2,
+        }
+      ]
+    })
+  }
 
-    deliveryOrder(id:number){
-        return this.http.patch('http://localhost:8080/stone.lunchtime/order/deliverandpay/'+id+'/1',{});
-    }
+  public deliveryOrder(id: number): Observable<Object> {
+    return this._http.patch('http://localhost:8080/stone.lunchtime/order/deliverandpay/' + id + '/1', {});
+  }
 
-    getOrdersUnconfirmedByUser(userId:any){
-        return this.http.get('http://localhost:8080/stone.lunchtime/order/findallforusertoday/'+userId);
-    }
-    cancelOrder(id:number){
-        return this.http.patch('http://localhost:8080/stone.lunchtime/order/cancel/'+id,{});
-    }
+  public getOrdersUnconfirmedByUser(userId: any): Observable<Object> {
+    return this._http.get('http://localhost:8080/stone.lunchtime/order/findallforusertoday/' + userId);
+  }
+
+  public cancelOrder(id: number): Observable<Object> {
+    return this._http.patch('http://localhost:8080/stone.lunchtime/order/cancel/' + id, {});
+  }
+  
 }

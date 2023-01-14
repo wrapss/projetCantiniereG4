@@ -1,18 +1,22 @@
-.main{
+.works {
+  font-weight: bolder;
+  background-color: yellow;
+} 
+
+.main {
   padding-left: 5%;
   padding-right: 5%;
 
 }
-.panier{
+.panier {
   width: 1000px;
 }
 
-.plat{
+.plat {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-
 
 .alert {
   width: 100%;

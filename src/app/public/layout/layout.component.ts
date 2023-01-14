@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalLoginComponent } from "../../auth/modal-login/modal-login.component";
-import {TokenService} from "../../_services/token.service";
-import {CartService} from "../../_services/cart.service";
+import { TokenService } from "../../_services/token.service";
+import { CartService } from "../../_services/cart.service";
 
 @Component({
   selector: 'app-layout',
@@ -11,31 +11,38 @@ import {CartService} from "../../_services/cart.service";
 })
 export class LayoutComponent implements OnInit{
 
+  public firstname!: string;
 
-  constructor(
-              private dialogRef : MatDialog,
-              public tokenService: TokenService,
-              public cartService: CartService
-              ) { }
-  public isAuthUser: boolean = this.tokenService.isLoggedAsUser();
-  public isAuthAdmin: boolean = this.tokenService.isLoggedAsAdmin();
+  constructor(private _dialogRef: MatDialog,
+              private _tokenService: TokenService,
+              private _cartService: CartService) { }
 
-  public firstname = '';
+  ngOnInit() {
+    this.firstname = this._tokenService.getUserInfo().firstname;
+  }
 
-ngOnInit() {
-  this.firstname = this.tokenService.getUserInfo().firstname;
-}
+  public userLogged(): boolean {
+    return this._tokenService.isLoggedAsUser();
+  }
 
-  openDialogLogin(){
-    this.dialogRef.open(ModalLoginComponent,{
-      data : {
-        name : 'Samuel'
+  public adminLogged(): boolean {
+    return this._tokenService.isLoggedAsAdmin();
+  }
+
+  public openDialogLogin(): void {
+    this._dialogRef.open(ModalLoginComponent,{
+      data: {
+        name: 'Samuel'
       }
     });
   }
-  logout(): void{
-    this.tokenService.clearToken()
+
+  public logout(): void {
+    this._tokenService.clearToken();
   }
 
+  public countCartProducts(): number {
+    return this._cartService.getCountCartProducts();
+  }
 
 }

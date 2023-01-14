@@ -1,25 +1,22 @@
+<p class="works"> u-edit-component works! </p>   <!-- A SUPPRIMER + class "works" ds .css -->
+
 <div class="userDetail">
-    <div>
-        <label for="">Prénom :</label>
-        {{ user.firstname}}
-    </div>
-    <div>
-        <label for="">Nom :</label>
-        {{ user.name}}
-    </div>
-    <div>
-        <label for="">Email :</label>
-        {{ user.email}}
-    </div>
+  <div>
+    <label> Prénom : {{ user.firstname }} </label>
+  </div>
+  <div> 
+    <label> Nom : {{ user.name }} </label> 
+  </div>
+  <div>
+    <label> Email : {{ user.email }} </label>
+  </div>
 </div>
 
 <div class="cagnotte">
-    <div>
-        <label for="">Cagnotte : </label>
-        {{ user.wallet }} €
-    </div>
-    <button (click)="creditAccount()" >Créditier</button>
-    <input type="number" id="amount" [(ngModel)]="amount" name="amount">
-    <button (click)="soldeAccount()" >Solder le compte</button>
-
+  <div>
+    <label> Cagnotte : {{ user.wallet | currency:'EUR' }} </label>
+  </div>
+  <button (click)="creditAccount()" > Créditer </button>
+  <input type="number" id="amount" [(ngModel)]="amount" name="amount">
+  <button (click)="soldeAccount()" > Solder le compte </button>
 </div>
