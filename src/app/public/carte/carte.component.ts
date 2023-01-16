@@ -28,7 +28,7 @@ export class CarteComponent implements OnInit {
   constructor(private _mealService: MealService) { }
 
   ngOnInit(): void {
-    console.log(this.getImageMealByID());   // TODO : rajouter les icones de menus
+    console.log(this.getImageMealByID());   
     this.getAllMeal();
   }
 

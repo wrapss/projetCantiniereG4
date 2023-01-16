@@ -32,8 +32,6 @@ export class ConfigurationComponent implements OnInit {
         let strArr = this.constraint.orderTimeLimit.split(':');
         this.constraint.hours = strArr[0];
         this.constraint.minute = strArr[1];
-        // console.log(strArr);
-        //this.constraint = data[0]
       }
     );
   }

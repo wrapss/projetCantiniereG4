@@ -24,9 +24,7 @@ export class UEditComponent implements OnInit {
               private _userService: UserService) { }
 
   ngOnInit(): void {
-    // let uid = this._activatedRoute.snapshot.paramMap.get('uid');
-    // console.log(uid);
-    this._userService.getUser(Number(this.uid)).subscribe( data => {   // Number() => réellement nécessaire ? 
+    this._userService.getUser(Number(this.uid)).subscribe( data => {   
       // @ts-ignore
       this.user = data
     } );
@@ -35,9 +33,7 @@ export class UEditComponent implements OnInit {
   /**
    * Fonction permettant de solder le compte d'un utilisateur
    */
-  /* TODO : mettre un solde de compte à 0 après utilisation de la fonction */
   public soldeAccount(): void {
-    // let uid = this._activatedRoute.snapshot.paramMap.get('uid');
     this._userService.soldeAccountUser(this.uid, this.amount).subscribe( data => {
       // @ts-ignore
       this.user = data;
@@ -48,7 +44,6 @@ export class UEditComponent implements OnInit {
    * Fonction permettant de créditer un montant sur le compte d'un utilisateur
    */
   public creditAccount(): void {
-    // let uid = this._activatedRoute.snapshot.paramMap.get('uid');
     this._userService.creditAccountUser(this.uid, this.amount).subscribe( data => {
       // @ts-ignore
       this.user = data

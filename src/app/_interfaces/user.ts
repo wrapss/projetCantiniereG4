@@ -14,21 +14,3 @@ export interface IUser {
   registrationDate: string;
   status: string;
 }
-
-// Pour faire quoi ?
-// export interface ISingleUser {
-//   data: IUser;
-// }
-
-// export interface IDataUser {
-//   data: IUser[];
-// }
-
-// export interface ITokenUser {
-//   id: number;
-//   nom: string;
-//   prenom: string;
-//   email: string;
-//   iap?: number;
-//   exp?: number;
-// }

@@ -13,24 +13,6 @@ import { UserService } from "../../../_services/user.service";
 })
 export class EditComponent implements OnInit {
 
-  /*userInfo : IUser = {
-    id:0,
-    firstname: '',
-    name: '',
-    email: '',
-    phone: '',
-    sex: 0,
-    address: '',
-    postalCode: '',
-    town: '',
-    isLunchLady: 0,
-    imageId: 0,
-    wallet: 0,
-    registrationDate: '',
-    status: ''
-  }
-  userID: any = 0;
-  */
   /* Informations de l'utilisateur */
   public userInfo!: IUser;
   /* Affichage du champ de modification du mot de passe */

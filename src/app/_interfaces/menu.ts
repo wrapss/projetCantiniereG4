@@ -20,8 +20,4 @@ export interface IValueAvailable {
   week: number;
 }
 
-// export interface IDataMenu {
-//   data: IMenu[];
-// }
-
 

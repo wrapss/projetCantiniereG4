@@ -1,7 +1,5 @@
 <div class="main">
 
-  <p class="works"> Panier-component works! </p>   <!-- A SUPPRIMER + class "works" ds .css -->
-
   <div *ngIf="alert.show" class="alert alert-{{alert.type}}">
     <div class="message"> {{ alert.message }} </div>
     <div class="close"><button (click)="setAlert('', '', false)"> x </button></div>

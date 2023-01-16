@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DatePipe } from "@angular/common";
 import { MenuService } from "../../_services/menu.service";
-// import { IMenu } from "../../_interfaces/menu";
 
 /**
  * Component permettant d'afficher la liste des menus de la semaine
@@ -43,7 +42,6 @@ export class PlatSemaineComponent implements OnInit {
    * Permet d'ajouter un menu à la liste
    */
   public addMenu(): void {
-    // console.log('add menu');
     this._menuService.addMenu(this.newmenu).subscribe( data => console.log(data) );
   }
   

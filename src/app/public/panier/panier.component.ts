@@ -63,9 +63,7 @@ export class PanierComponent implements OnInit {
    */
   public getPlatByJours(jour: string): IMenuReduced[] {
     let menu: IMenuReduced[] = this._cartService.getLocalCartProducts().filter( (f) => f.jour == jour );
-    // console.log("menu IMenuReduced[]", menu);
     return menu;
-    // return this._cartService.getLocalCartProducts().filter( (f) => f.jours == jour );
   }
 
   /**

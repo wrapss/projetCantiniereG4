@@ -12,7 +12,6 @@ import { Category } from "../../_interfaces/category";
   styleUrls: ['./carte.component.css']
 })
 export class CarteComponent implements OnInit {
-// The category for this element. unknown(0), appetizers(1), starters(2), main_dishes(3), others(4), desserts(5), brunchs_and_lunches(6), soups(7), sauces(8), drinks(9), sandwiches(10), snacks(11)
   /* Liste des catégories de plats */
   public categories: Category[] = [
     {id: 1, name: 'appetizers'},
