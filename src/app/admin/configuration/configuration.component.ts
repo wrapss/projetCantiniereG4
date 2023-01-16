@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ConstraintService } from "../../_services/constraint.service";
 import { IContraint } from "../../_interfaces/contraint";
 
+/**
+ * Component permettant d'afficher les contraintes de configuration de l'app
+ */
 @Component({
   selector: 'app-configuration',
   templateUrl: './configuration.component.html',
@@ -9,6 +12,7 @@ import { IContraint } from "../../_interfaces/contraint";
 })
 export class ConfigurationComponent implements OnInit {
 
+  /* Contraintes de configuration */
   public constraint: IContraint = {
     orderTimeLimit: '',
     maximumOrderPerDay: 0,
@@ -28,12 +32,13 @@ export class ConfigurationComponent implements OnInit {
         let strArr = this.constraint.orderTimeLimit.split(':');
         this.constraint.hours = strArr[0];
         this.constraint.minute = strArr[1];
-        // console.log(strArr);
-        //this.constraint = data[0]
       }
     );
   }
 
+  /**
+   * Enregistre les modifications de la configuration
+   */
   public onSubmit() {
     this.constraint.orderTimeLimit = this.constraint.hours + ':'+ this.constraint.minute + ':00';
     this._constraintService.setConstraint(this.constraint).subscribe( data => console.log(data) );

@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { DatePipe } from "@angular/common";
 import { MenuService } from "../../_services/menu.service";
-// import { IMenu } from "../../_interfaces/menu";
 
+/**
+ * Component permettant d'afficher la liste des menus de la semaine
+ */
 @Component({
   selector: 'app-plat-semaine',
   templateUrl: './plat-semaine.component.html',
@@ -10,6 +12,7 @@ import { MenuService } from "../../_services/menu.service";
 })
 export class PlatSemaineComponent implements OnInit {
 
+  /* Liste des jours de la semaine */
   public JoursSemaine: any[] = [
     {id: 1, name: 'Lundi'},
     {id: 2, name: 'Mardi'},
@@ -17,7 +20,9 @@ export class PlatSemaineComponent implements OnInit {
     {id: 4, name: 'Jeudi'},
     {id: 5, name: 'Vendredi'},
   ];
+  /* Liste des menus */
   public menus: any = [];
+  /* Ajout d'un nouveau menu */
   public newmenu: any = {
     label: '',
     priceDF: 1
@@ -33,8 +38,10 @@ export class PlatSemaineComponent implements OnInit {
     const dayNumber = this._datepipe.transform(today, 'c');
   }
 
+  /**
+   * Permet d'ajouter un menu à la liste
+   */
   public addMenu(): void {
-    // console.log('add menu');
     this._menuService.addMenu(this.newmenu).subscribe( data => console.log(data) );
   }
   

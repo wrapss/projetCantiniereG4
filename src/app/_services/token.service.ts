@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Router } from "@angular/router";
-// import { ITokenUser } from "src/app/_interfaces/user";
 import jwtDecode from "jwt-decode";
 
 @Injectable({

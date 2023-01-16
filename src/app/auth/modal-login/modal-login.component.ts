@@ -13,28 +13,42 @@ import { MdpOublieComponent } from "../mdp-oublie/mdp-oublie.component";
 })
 export class ModalLoginComponent  {
 
+  /* Identifiants de connexion de l'utilisateur */
   public form: ICredentials = {
     email: '',
     password: ''
   };
+  /* Message d'erreur si utilisateur absent de la base */
   public alerte = false;
 
   constructor(private _tokenService: TokenService,
               private _dialogRef : MatDialog,
               private _authService: AuthService) {}
 
+  /**
+   * Ferme le modal
+   */
   public close(): void {
     this._dialogRef.closeAll();
   }
 
+  /**
+   * Ouvre le modal de création de compte
+   */
   public openDialogRegister(): void {
     this._dialogRef.open(ModalRegisterComponent);
   }
 
+  /**
+   * Ouvre le modal de mot de passe oublié
+   */
   public openDialogPassword(): void {
     this._dialogRef.open(MdpOublieComponent);
   }
 
+  /**
+   * Valide, ou non, la combinaison nom d'utilisateur et mot de passe 
+   */
   public login(): void {
     this._authService.login(this.form).subscribe(
       data => {
