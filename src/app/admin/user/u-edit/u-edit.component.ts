@@ -3,6 +3,9 @@ import { ActivatedRoute } from "@angular/router";
 import { UserService } from "../../../_services/user.service";
 import { IUser } from "../../../_interfaces/user";
 
+/**
+ * Component permettant d'afficher les détails d'un compte utilisateur
+ */
 @Component({
   selector: 'app-u-edit',
   templateUrl: './u-edit.component.html',
@@ -10,9 +13,12 @@ import { IUser } from "../../../_interfaces/user";
 })
 export class UEditComponent implements OnInit {
 
+  /* Informations de l'utilisateur */
   public user!: IUser;
-  public amount: number = 0;
+  /* uid de l'utilisateur */
   public uid: string | null = this._activatedRoute.snapshot.paramMap.get('uid');
+  /* Montant à créditer ou à solder */
+  public amount: number = 0;
 
   constructor(private _activatedRoute: ActivatedRoute,
               private _userService: UserService) { }
@@ -26,7 +32,10 @@ export class UEditComponent implements OnInit {
     } );
   }
 
-  /** TODO : mettre un solde de compte à 0 après utilisation de la fonction */
+  /**
+   * Fonction permettant de solder le compte d'un utilisateur
+   */
+  /* TODO : mettre un solde de compte à 0 après utilisation de la fonction */
   public soldeAccount(): void {
     // let uid = this._activatedRoute.snapshot.paramMap.get('uid');
     this._userService.soldeAccountUser(this.uid, this.amount).subscribe( data => {
@@ -35,6 +44,9 @@ export class UEditComponent implements OnInit {
     } );
   }
 
+  /**
+   * Fonction permettant de créditer un montant sur le compte d'un utilisateur
+   */
   public creditAccount(): void {
     // let uid = this._activatedRoute.snapshot.paramMap.get('uid');
     this._userService.creditAccountUser(this.uid, this.amount).subscribe( data => {

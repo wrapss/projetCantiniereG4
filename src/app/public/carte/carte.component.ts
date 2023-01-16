@@ -3,6 +3,9 @@ import { MealService } from "../../_services/meal.service";
 import { IMeal } from "../../_interfaces/meal";
 import { Category } from '../../_interfaces/category';
 
+/**
+ * Component permettant d'afficher les différentes catégories de plats
+ */
 @Component({
   selector: 'app-carte',
   templateUrl: './carte.component.html',
@@ -10,6 +13,7 @@ import { Category } from '../../_interfaces/category';
 })
 export class CarteComponent implements OnInit {
 
+  /* Liste des catégories de plats */
   public categories: Category[] =[
     {id: 1, name: 'appetizers'},
     {id: 2, name: 'starters'},
@@ -18,6 +22,7 @@ export class CarteComponent implements OnInit {
     {id: 7, name: 'brunchs_and_lunches'},
     {id: 9, name: 'sauces'},
   ];
+  /* Liste des plats */
   private _allMeals: IMeal[] = [];
 
   constructor(private _mealService: MealService) { }
@@ -27,6 +32,10 @@ export class CarteComponent implements OnInit {
     this.getAllMeal();
   }
 
+  /**
+   * Affiche les icônes des différents plats
+   * @returns Icône associée au plat
+   */
   private getImageMealByID() {
     return this._mealService.getImageMenuByID(1).subscribe(
       data => {
@@ -37,6 +46,9 @@ export class CarteComponent implements OnInit {
     )
   }
 
+  /**
+   * Récupère la liste de tous les plats
+   */
   private getAllMeal(): void {
     this._mealService.getAllMeals().subscribe(
       // @ts-ignore
@@ -44,6 +56,11 @@ export class CarteComponent implements OnInit {
     );
   }
 
+  /**
+   * Affiche la liste des plats disponibles pour les différentes catégories
+   * @param category Catégorie de plats
+   * @returns Tableau contenant les plats associés à la catégorie passée en paramètre
+   */
   public getMealByCategory(category: any): IMeal[] {
     return this._allMeals.filter((f) => f.category == category);
   }

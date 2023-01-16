@@ -4,6 +4,9 @@ import { OrderService } from "../../../_services/order.service";
 import { UserService } from "../../../_services/user.service";
 import { IUser } from "../../../_interfaces/user";
 
+/**
+ * Component permettant d'afficher les informations d'un compte utilisateur
+ */
 @Component({
   selector: 'app-details',
   templateUrl: './details.component.html',
@@ -27,7 +30,9 @@ export class DetailsComponent implements OnInit {
     registrationDate: '',
     status: ''
   }*/ 
+  /* Informations de l'utilisateur */
   public userInfo!: IUser;
+  /* Commandes en attente de validation par l'utilisateur */
   public orderUnconfirmed: any = [];
 
   constructor(private _tokenService: TokenService,

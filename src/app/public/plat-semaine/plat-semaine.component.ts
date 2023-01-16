@@ -8,6 +8,9 @@ import {IUser} from "../../_interfaces/user";
 import {IMeal} from "../../_interfaces/meal";
 import { IMenu, IMenuReduced } from "../../_interfaces/menu";*/
 
+/**
+ * Component permettant d'afficher les deux différents menus proposés chaque jour de la semaine
+ */
 @Component({
   selector: 'app-plat-semaine',
   templateUrl: './plat-semaine.component.html',
@@ -15,6 +18,7 @@ import { IMenu, IMenuReduced } from "../../_interfaces/menu";*/
 })
 export class PlatSemaineComponent implements OnInit {
 
+  /* Liste des jours de la semaine */
   public JoursSemaine: any[] = [
     { id: 1, name: 'Lundi' },
     { id: 2, name: 'Mardi' },
@@ -22,6 +26,7 @@ export class PlatSemaineComponent implements OnInit {
     { id: 4, name: 'Jeudi' },
     { id: 5, name: 'Vendredi' },
   ];
+  /* Menus en fonction du jour */
   public platJours: IMenuReduced[] = [
     { id: 1, label: 'Menu 1', priceDF: '13', jour: 'Lundi' },  // Why défini comme ça ? Dans les consignes ?
     { id: 2, label: 'Menu 2', priceDF: '17', jour: 'Lundi' },
@@ -61,10 +66,19 @@ export class PlatSemaineComponent implements OnInit {
   //   )
   // }
 
+  /**
+   * Permet d'afficher les 2 menus du jour, en fonction du jour de la semaine
+   * @param jour jour de la semaine sur lequel filtrer les menus
+   * @returns Tableau contenant les menus associés au jour passé en paramètre
+   */
   public getPlatByJours(jour: any): IMenuReduced[] {
     return this.platJours.filter((f) => f.jour == jour);
   }
 
+  /**
+   * Permet d'ajouter un menu au panier
+   * @param platJour menu du jour à ajouter au panier
+   */
   public onSubmitCart(platJour: any): void {
     this._cartService.addToCart(platJour);
   }
